@@ -412,8 +412,8 @@ input:focus, select:focus, textarea:focus{
 .profile-quote{ font-style:italic; color: var(--navy); font-size:15.5px; }
 
 /* ---------- SPA routing ---------- */
-.page{ display:none; }
-.page.active{ display:block; animation: fadein .2s ease; }
+.page:not(.active){ display:none !important; }
+.page.active{ animation: fadein .2s ease; }
 
 body.pre-auth .main-nav,
 body.pre-auth .hamburger{ display:none; }
