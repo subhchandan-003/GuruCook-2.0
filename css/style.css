@@ -476,6 +476,15 @@ body.pre-auth .header-inner{ justify-content:center; }
 .stat-tile .stat-num{ font-size: 34px; font-weight:700; color: var(--navy); line-height:1.1; }
 .stat-tile .stat-label{ font-size: 14px; color: var(--navy-soft); margin-top:4px; }
 
+.login-activity-list{ display:flex; flex-direction:column; }
+.login-activity-row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding: 12px 0; border-bottom: 2px solid var(--border-soft); font-size:14.5px;
+}
+.login-activity-row:last-child{ border-bottom:none; padding-bottom:0; }
+.login-activity-row .la-email{ font-weight:700; color: var(--navy); }
+.login-activity-row .la-time{ color: var(--navy-soft); white-space:nowrap; font-size:13.5px; }
+
 .admin-card-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .admin-progress{
   background: var(--border-soft); border-radius:999px; height:8px; overflow:hidden; margin: 10px 0 14px;

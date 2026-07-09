@@ -1,4 +1,4 @@
-// GuruCool 2.0 — single-page app router + shared interactivity
+// GuruCool 2.0 — single-page app router + Supabase-backed auth & activity tracking
 (function () {
   "use strict";
 
@@ -14,8 +14,13 @@
     contribute: "Contribute to GuruCool — GuruCool 2.0",
     admin: "Admin Dashboard — GuruCool 2.0"
   };
-  var MASTER_EMAIL = "admin@gurucool.in";
-  var MASTER_PASSWORD = "GuruCool@Admin2.0";
+
+  var SUPABASE_URL = "https://kbrutxednbudjbxvtgng.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_6_PgVUdxkI9G6z54S4_Ltw_KjXANM8V";
+  var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  var currentUser = null;
+  var currentRole = null;
 
   /* ---------------- Mobile hamburger nav ---------------- */
   var hamburger = document.getElementById("hamburgerBtn");
@@ -35,13 +40,44 @@
     });
   }
 
+  /* ---------------- Session helpers ---------------- */
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  async function cacheSessionFromUser(user) {
+    currentUser = user;
+    var res = await supabaseClient.from("profiles").select("full_name, email, role").eq("id", user.id).single();
+    var profile = res.data;
+    currentRole = (profile && profile.role) || "student";
+    var displayName = (profile && profile.full_name) || (user.email ? user.email.split("@")[0] : "Junior");
+    localStorage.setItem("gc_name", displayName);
+    localStorage.setItem("gc_email", user.email || "");
+  }
+
+  function clearSessionCache() {
+    currentUser = null;
+    currentRole = null;
+    localStorage.removeItem("gc_name");
+    localStorage.removeItem("gc_email");
+  }
+
+  function recordLogin() {
+    supabaseClient.rpc("record_login").then(function (res) {
+      if (res.error) console.error("record_login failed:", res.error.message);
+    });
+  }
+
   /* ---------------- Logout ---------------- */
   var logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
-    logoutBtn.addEventListener("click", function () {
-      localStorage.removeItem("gc_name");
-      localStorage.removeItem("gc_email");
-      localStorage.removeItem("gc_role");
+    logoutBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      clearSessionCache();
+      navigate("login");
+      supabaseClient.auth.signOut();
     });
   }
 
@@ -63,8 +99,7 @@
 
   function updateAdminRibbon(route) {
     var existing = document.getElementById("adminRibbon");
-    var isAdmin = localStorage.getItem("gc_role") === "admin";
-    var show = isAdmin && route !== "login" && route !== "admin";
+    var show = currentRole === "admin" && route !== "login" && route !== "admin";
     if (show && !existing) {
       var banner = document.createElement("div");
       banner.id = "adminRibbon";
@@ -91,12 +126,51 @@
     if (active && crumb) crumb.textContent = labels[active.getAttribute("data-tab")] || "Resources";
   }
 
+  /* ---------------- Admin: live registered-user count + recent logins ---------------- */
+  function loadAdminStats() {
+    var statEl = document.getElementById("statRegisteredUsers");
+    var listEl = document.getElementById("loginActivityList");
+    if (!statEl && !listEl) return;
+
+    if (statEl) {
+      supabaseClient.from("profiles").select("*", { count: "exact", head: true }).then(function (res) {
+        statEl.textContent = res.count != null ? res.count : "—";
+      });
+    }
+
+    if (listEl) {
+      supabaseClient
+        .from("login_events")
+        .select("email, logged_in_at")
+        .order("logged_in_at", { ascending: false })
+        .limit(20)
+        .then(function (res) {
+          if (res.error || !res.data || res.data.length === 0) {
+            listEl.innerHTML = '<p class="text-muted mb-0">No login activity yet.</p>';
+            return;
+          }
+          listEl.innerHTML = res.data
+            .map(function (row) {
+              var when = new Date(row.logged_in_at).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+              return (
+                '<div class="login-activity-row"><span class="la-email">' +
+                escapeHtml(row.email) +
+                '</span><span class="la-time">' +
+                escapeHtml(when) +
+                "</span></div>"
+              );
+            })
+            .join("");
+        });
+    }
+  }
+
   function render() {
     var parsed = parseHash();
     var route = ROUTES.indexOf(parsed.route) !== -1 ? parsed.route : "login";
 
-    if (route === "admin" && localStorage.getItem("gc_role") !== "admin") {
-      window.location.hash = "#login";
+    if (route === "admin" && currentRole !== "admin") {
+      navigate("login");
       return;
     }
 
@@ -120,6 +194,8 @@
       if (term) activateTab("term", "term-" + term);
       syncResourceBreadcrumb();
     }
+
+    if (route === "admin") loadAdminStats();
 
     window.scrollTo(0, 0);
   }
@@ -161,7 +237,7 @@
   }
   window.gcActivateTab = activateTab;
 
-  /* ---------------- Auth page: sign up / login ---------------- */
+  /* ---------------- Auth: sign up ---------------- */
   var signupForm = document.getElementById("signupForm");
   if (signupForm) {
     var emailInput = document.getElementById("signupEmail");
@@ -169,8 +245,10 @@
     var pw = document.getElementById("signupPassword");
     var pw2 = document.getElementById("signupConfirmPassword");
     var pwError = document.getElementById("signupPasswordError");
+    var signupGeneralError = document.getElementById("signupGeneralError");
+    var signupSubmitBtn = document.getElementById("signupSubmitBtn");
 
-    signupForm.addEventListener("submit", function (e) {
+    signupForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       var validEmail = /^[a-zA-Z0-9._%+-]+@iimsambalpur\.ac\.in$/i.test(emailInput.value.trim());
       var passMatch = pw.value.length >= 6 && pw.value === pw2.value;
@@ -183,13 +261,48 @@
       pw2.classList.toggle("field-ok", passMatch);
       pwError.classList.toggle("show", !passMatch);
 
+      signupGeneralError.classList.remove("show");
+
       if (!validEmail || !passMatch) return;
 
       var name = document.getElementById("signupName").value.trim();
-      if (name) localStorage.setItem("gc_name", name);
-      localStorage.setItem("gc_email", emailInput.value.trim());
-      localStorage.setItem("gc_role", "student");
-      navigate("welcome");
+      var emailVal = emailInput.value.trim();
+
+      signupSubmitBtn.disabled = true;
+      signupSubmitBtn.textContent = "Creating your account…";
+
+      try {
+        var signUpResult = await supabaseClient.auth.signUp({
+          email: emailVal,
+          password: pw.value,
+          options: { data: { full_name: name } }
+        });
+
+        if (signUpResult.error) {
+          var msg = /already registered|already exists/i.test(signUpResult.error.message || "")
+            ? "This email is already registered — try logging in instead."
+            : "We couldn't create your account. Please double-check your IIM Sambalpur email ID and try again.";
+          signupGeneralError.textContent = msg;
+          signupGeneralError.classList.add("show");
+          return;
+        }
+
+        if (!signUpResult.data.session) {
+          signupGeneralError.textContent = "Account created — please confirm your email before logging in.";
+          signupGeneralError.classList.add("show");
+          return;
+        }
+
+        await cacheSessionFromUser(signUpResult.data.session.user);
+        recordLogin();
+        navigate("welcome");
+      } catch (err) {
+        signupGeneralError.textContent = "Something went wrong. Please try again in a moment.";
+        signupGeneralError.classList.add("show");
+      } finally {
+        signupSubmitBtn.disabled = false;
+        signupSubmitBtn.textContent = "Create My GuruCool Account";
+      }
     });
 
     emailInput.addEventListener("input", function () {
@@ -198,30 +311,40 @@
     });
   }
 
+  /* ---------------- Auth: login ---------------- */
   var loginForm = document.getElementById("loginForm");
   if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
+    var loginErrorEl = document.getElementById("loginError");
+    var loginSubmitBtn = document.getElementById("loginSubmitBtn");
+
+    loginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       var loginEmail = document.getElementById("loginEmail");
       var loginPassword = document.getElementById("loginPassword");
       var emailVal = (loginEmail && loginEmail.value.trim()) || "";
       var passVal = (loginPassword && loginPassword.value) || "";
 
-      if (emailVal.toLowerCase() === MASTER_EMAIL && passVal === MASTER_PASSWORD) {
-        localStorage.setItem("gc_role", "admin");
-        localStorage.setItem("gc_name", "Admin");
-        localStorage.setItem("gc_email", emailVal);
-        navigate("admin");
-        return;
-      }
+      loginErrorEl.classList.remove("show");
+      loginSubmitBtn.disabled = true;
+      loginSubmitBtn.textContent = "Signing you in…";
 
-      localStorage.setItem("gc_role", "student");
-      if (emailVal) {
-        var namePart = emailVal.split("@")[0].replace(/[._]/g, " ");
-        localStorage.setItem("gc_name", namePart.replace(/\b\w/g, function (c) { return c.toUpperCase(); }));
-        localStorage.setItem("gc_email", emailVal);
+      try {
+        var signInResult = await supabaseClient.auth.signInWithPassword({ email: emailVal, password: passVal });
+
+        if (signInResult.error || !signInResult.data.session) {
+          loginErrorEl.classList.add("show");
+          return;
+        }
+
+        await cacheSessionFromUser(signInResult.data.session.user);
+        recordLogin();
+        navigate(currentRole === "admin" ? "admin" : "dashboard");
+      } catch (err) {
+        loginErrorEl.classList.add("show");
+      } finally {
+        loginSubmitBtn.disabled = false;
+        loginSubmitBtn.textContent = "Enter GuruCool";
       }
-      navigate("dashboard");
     });
   }
 
@@ -293,6 +416,24 @@
     });
   }
 
-  /* ---------------- Initial render ---------------- */
-  render();
+  /* ---------------- Session bootstrap ---------------- */
+  async function initSession() {
+    try {
+      var sessionResult = await supabaseClient.auth.getSession();
+      var session = sessionResult.data && sessionResult.data.session;
+      if (session && session.user) {
+        await cacheSessionFromUser(session.user);
+        var parsed = parseHash();
+        if (!window.location.hash || parsed.route === "login") {
+          navigate(currentRole === "admin" ? "admin" : "dashboard");
+          return;
+        }
+      }
+    } catch (err) {
+      // No valid session — fall through to login page.
+    }
+    render();
+  }
+
+  initSession();
 })();

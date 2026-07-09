@@ -96,7 +96,8 @@
               <input type="password" id="signupConfirmPassword" name="confirmPassword" placeholder="Type it once more" minlength="6" required>
               <div class="error-text" id="signupPasswordError">Passwords must match and be at least 6 characters.</div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Create My GuruCool Account</button>
+            <div class="error-text" id="signupGeneralError"></div>
+            <button type="submit" class="btn btn-primary btn-block" id="signupSubmitBtn">Create My GuruCool Account</button>
             <p class="text-center mt-16 mb-0" style="font-size:14px;">
               Already on GuruCool? <a href="#" style="color:var(--accent-dark); font-weight:700;" onclick="gcActivateTab('auth','login'); return false;">Login here</a>
             </p>
@@ -114,7 +115,8 @@
               <label for="loginPassword">Password</label>
               <input type="password" id="loginPassword" name="password" placeholder="Your password" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Enter GuruCool</button>
+            <div class="error-text" id="loginError">Incorrect email or password.</div>
+            <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">Enter GuruCool</button>
             <p class="text-center mt-16 mb-0" style="font-size:14px;">
               New here? <a href="#" style="color:var(--accent-dark); font-weight:700;" onclick="gcActivateTab('auth','signup'); return false;">Create an account</a>
             </p>
@@ -987,11 +989,21 @@
           <div class="stat-label">Contributions pending review</div>
         </div>
         <div class="stat-tile">
-          <div class="stat-num">128</div>
-          <div class="stat-label">Registered juniors (demo data)</div>
+          <div class="stat-num" id="statRegisteredUsers">—</div>
+          <div class="stat-label">Registered juniors</div>
         </div>
       </div>
-      <p class="text-muted mt-8" style="font-size:13.5px;">Numbers above are illustrative for this prototype — live counts will sync once GuruCool is connected to a real backend.</p>
+      <p class="text-muted mt-8" style="font-size:13.5px;">Term and handbook counts above are illustrative for this prototype; the registered-junior count is live from Supabase.</p>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <h3>Login activity</h3>
+      <p class="text-muted" style="font-size:14.5px;">Every successful login, most recent first — email and timestamp, straight from <code>login_events</code>.</p>
+      <div class="card mt-16" id="loginActivityCard">
+        <div id="loginActivityList" class="login-activity-list">
+          <p class="text-muted mb-0">Loading recent logins…</p>
+        </div>
+      </div>
     </section>
 
     <section class="section container" style="padding-top:0;">
@@ -1083,6 +1095,7 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
