@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GuruCool 2.0 — Sign Up or Login</title>
+<meta name="description" content="Your one-stop academic buddy for notes, assignments, PPTs and senior gyaan at IIM Sambalpur.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<svg class="doodle-defs" aria-hidden="true">
+  <symbol id="ic-book" viewBox="0 0 24 24"><path d="M3 4.5c2.5-1.4 5.4-1.6 8 0 2.6-1.6 5.5-1.4 8 0v14c-2.5-1.4-5.4-1.6-8 0-2.6-1.6-5.5-1.4-8 0V4.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 4.8v13.4M13 4.8v13.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".5"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 2.5l2.4 6.1 6.4.4-5 4.2 1.7 6.3L12 16l-5.5 3.5L8.2 13l-5-4.2 6.4-.4L12 2.5Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-paperclip" viewBox="0 0 24 24"><path d="M7 12.6 15 4.5a3.3 3.3 0 0 1 4.7 4.7L11 18a5 5 0 0 1-7-7l8-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-bookmark" viewBox="0 0 24 24"><path d="M6 3.5h12v17l-6-4-6 4v-17Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-pencil" viewBox="0 0 24 24"><path d="M4 20l1-4.6L15.3 5.1a1.8 1.8 0 0 1 2.5 0l1.1 1.1a1.8 1.8 0 0 1 0 2.5L8.6 19 4 20Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13.8 6.6l3.6 3.6" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="ic-sticky" viewBox="0 0 24 24"><path d="M4 4h13l3 3v13H4V4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M17 4v3h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-highlighter" viewBox="0 0 24 24"><path d="M13 3l8 8-7 7-4-1-4 4H3v-3l4-4-1-4 7-7Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-10-9.3C0.4 7 2.6 3.5 6.3 3.5c2.1 0 3.7 1.2 4.7 2.8 1-1.6 2.6-2.8 4.7-2.8 3.7 0 5.9 3.5 4.3 7.2C19.5 15.4 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M20 20l-4.3-4.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.8 19c1-3.3 3.4-5 6.2-5s5.2 1.7 6.2 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="17" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M15.5 13.2c2.1.1 3.9 1.6 4.7 4.3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+  <symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 8V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 13h18" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="ic-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 6.5l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-upload" viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-folder" viewBox="0 0 24 24"><path d="M3 6.5a1.5 1.5 0 0 1 1.5-1.5H9l2 2h8.5A1.5 1.5 0 0 1 21 8.5V18a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18v-11.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 10v6.2M7.5 7.4v.1M12 16.2v-3.7c0-1.3.9-2.3 2.2-2.3 1.3 0 2 .9 2 2.3v3.7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-inbox" viewBox="0 0 24 24"><path d="M3 12h5l2 3h4l2-3h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="3" y="6" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="#dashboard" class="brand">
+      <span class="brand-badge"><svg width="22" height="22"><use href="#ic-book"/></svg></span>
+      <span class="brand-text">GuruCool <small>2.0 &middot; IIM Sambalpur</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#dashboard" class="nav-link" data-nav="dashboard">Home</a>
+      <a href="#resources" class="nav-link" data-nav="resources">Resources</a>
+      <a href="#handbook" class="nav-link" data-nav="handbook">Industry Handbook</a>
+      <a href="#founders" class="nav-link" data-nav="founders">Founders</a>
+      <a href="#team" class="nav-link" data-nav="team">Team</a>
+      <a href="#contribute" class="nav-link" data-nav="contribute">Contribute</a>
+      <a href="#login" class="nav-link nav-logout" id="logoutBtn">Logout</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ================= LOGIN / SIGNUP ================= -->
+  <section class="page active auth-main relative" data-page="login">
+    <svg class="doodle dim-navy" style="top:8%; left:6%; width:46px; height:46px;" aria-hidden="true"><use href="#ic-star"/></svg>
+    <svg class="doodle dim-green" style="bottom:12%; left:9%; width:54px; height:54px; transform:rotate(-12deg);" aria-hidden="true"><use href="#ic-paperclip"/></svg>
+    <svg class="doodle" style="top:14%; right:8%; width:48px; height:48px; transform:rotate(8deg);" aria-hidden="true"><use href="#ic-bookmark"/></svg>
+    <svg class="doodle dim-green" style="bottom:8%; right:7%; width:40px; height:40px;" aria-hidden="true"><use href="#ic-heart"/></svg>
+
+    <div class="container" style="max-width:480px;">
+      <div class="text-center mt-16" style="margin-bottom:26px;">
+        <span class="hero-badge">Built by Seniors, For Juniors</span>
+        <h1>Welcome to GuruCool 2.0</h1>
+        <p class="lede">Your one-stop academic buddy for notes, assignments, PPTs, and senior gyaan at IIM Sambalpur.</p>
+      </div>
+
+      <div class="card auth-card">
+        <div class="tabs auth-tabs" data-tabgroup="auth">
+          <button class="tab-btn auth-tab active" data-tab="signup" type="button">Sign Up</button>
+          <button class="tab-btn auth-tab" data-tab="login" type="button">Login</button>
+        </div>
+
+        <!-- SIGN UP -->
+        <div class="tab-panel active" data-tabpanel="signup" data-tabgroup="auth">
+          <form id="signupForm" novalidate>
+            <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input type="text" id="signupName" name="name" placeholder="e.g. Ananya Rao" required>
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">IIM Sambalpur Email ID</label>
+              <input type="email" id="signupEmail" name="email" placeholder="yourname@iimsambalpur.ac.in" required>
+              <div class="help-text">Use your official @iimsambalpur.ac.in email ID only.</div>
+              <div class="error-text" id="signupEmailError">Only IIM Sambalpur email IDs are allowed.</div>
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input type="password" id="signupPassword" name="password" placeholder="At least 6 characters" minlength="6" required>
+            </div>
+            <div class="form-group">
+              <label for="signupConfirmPassword">Confirm Password</label>
+              <input type="password" id="signupConfirmPassword" name="confirmPassword" placeholder="Type it once more" minlength="6" required>
+              <div class="error-text" id="signupPasswordError">Passwords must match and be at least 6 characters.</div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Create My GuruCool Account</button>
+            <p class="text-center mt-16 mb-0" style="font-size:14px;">
+              Already on GuruCool? <a href="#" style="color:var(--accent-dark); font-weight:700;" onclick="gcActivateTab('auth','login'); return false;">Login here</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="tab-panel" data-tabpanel="login" data-tabgroup="auth">
+          <form id="loginForm" novalidate>
+            <div class="form-group">
+              <label for="loginEmail">Email ID</label>
+              <input type="email" id="loginEmail" name="email" placeholder="yourname@iimsambalpur.ac.in" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" name="password" placeholder="Your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Enter GuruCool</button>
+            <p class="text-center mt-16 mb-0" style="font-size:14px;">
+              New here? <a href="#" style="color:var(--accent-dark); font-weight:700;" onclick="gcActivateTab('auth','signup'); return false;">Create an account</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WELCOME ================= -->
+  <section class="page relative" data-page="welcome">
+    <svg class="doodle" style="top:6%; left:4%; width:44px; height:44px;" aria-hidden="true"><use href="#ic-star"/></svg>
+    <svg class="doodle dim-green" style="top:10%; right:5%; width:50px; height:50px; transform:rotate(10deg);" aria-hidden="true"><use href="#ic-sticky"/></svg>
+
+    <section class="hero container">
+      <span class="hero-badge">Notes, Assignments &amp; Senior Gyaan — All in One Place</span>
+      <h1 data-greet-name="Hey {name}, Welcome to GuruCool 2.0">Hey Junior, Welcome to GuruCool 2.0</h1>
+      <p class="lede" style="max-width:760px;">Starting an MBA can feel overwhelming — new subjects, new professors, new deadlines, new committees, new expectations, and a lot happening at once. GuruCool is here to make that journey a little easier.</p>
+    </section>
+
+    <section class="section container">
+      <div class="grid grid-2">
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-book"/></svg></span>
+          <h3 class="mt-16">What is GuruCool?</h3>
+          <p>GuruCool is a student-led academic resource platform created to bring notes, assignments, PPTs, senior-curated resources, and useful academic guidance into one simple place. Instead of digging through endless WhatsApp messages and scattered Google Drive folders, juniors can find everything trimester-wise and subject-wise.</p>
+        </div>
+        <div class="card hoverable card-tilt-green">
+          <span class="wrap-icon green"><svg width="22" height="22"><use href="#ic-heart"/></svg></span>
+          <h3 class="mt-16">Why GuruCool Exists</h3>
+          <p>We know how confusing the first few months can feel. GuruCool exists to hold your hand through that phase — not as a formal system, but as a friendly senior support space where resources, guidance, and experiences are shared openly.</p>
+        </div>
+        <div class="card hoverable card-tilt-yellow">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-bookmark"/></svg></span>
+          <h3 class="mt-16">Our Mission</h3>
+          <p>To make academic navigation simpler for every junior by collecting important notes, assignments, PPTs, project references, and senior insights in one easy-to-access platform.</p>
+        </div>
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-star"/></svg></span>
+          <h3 class="mt-16">Our Vision</h3>
+          <p>To build a culture where every batch supports the next batch, and academic resources flow smoothly from seniors to juniors year after year.</p>
+        </div>
+      </div>
+
+      <div class="card mt-24 hoverable">
+        <h3>Our Values</h3>
+        <div class="pill-row mt-16">
+          <span class="value-chip">Care</span>
+          <span class="value-chip">Community</span>
+          <span class="value-chip">Accessibility</span>
+          <span class="value-chip">Simplicity</span>
+          <span class="value-chip">Trust</span>
+          <span class="value-chip">Collaboration</span>
+          <span class="value-chip">No Junior Left Confused</span>
+        </div>
+      </div>
+
+      <div class="card mt-24 hoverable card-tilt-rose">
+        <span class="wrap-icon rose"><svg width="22" height="22"><use href="#ic-upload"/></svg></span>
+        <h3 class="mt-16">Future Goal</h3>
+        <p>In the future, GuruCool will allow students to upload their own notes, share project learnings, contribute resources, and pass on useful academic guidance to upcoming batches.</p>
+      </div>
+
+      <div class="sticky-note mt-32" style="max-width:640px; margin-left:auto; margin-right:auto;">
+        <p class="mb-0"><strong>This is not just a resource website.</strong> It is a small academic safety net created by seniors for juniors.</p>
+      </div>
+
+      <div class="flex-center gap-16 mt-32" style="flex-wrap:wrap;">
+        <a href="#resources" class="btn btn-primary">Proceed to Resources</a>
+        <a href="#founders" class="btn btn-secondary">Meet the People Behind GuruCool</a>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= DASHBOARD ================= -->
+  <section class="page relative" data-page="dashboard">
+    <svg class="doodle" style="top:6%; right:6%; width:44px; height:44px; transform:rotate(-8deg);" aria-hidden="true"><use href="#ic-pencil"/></svg>
+
+    <section class="hero container">
+      <span class="hero-badge">Your Academic Buddy at IIM Sambalpur</span>
+      <h1 data-greet-name="GuruCool Dashboard">GuruCool Dashboard</h1>
+      <div class="sticky-note" style="max-width:620px;">
+        <p class="mb-0">Everything you need, arranged trimester-wise and topic-wise. No more endless WhatsApp digging.</p>
+      </div>
+
+      <div class="search-bar mt-32">
+        <svg width="20" height="20"><use href="#ic-search"/></svg>
+        <input type="search" id="dashSearchInput" placeholder="Search notes, subjects, assignments, industries…">
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="grid grid-3">
+
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-book"/></svg></span>
+          <h3 class="mt-16">Term-I Resources</h3>
+          <p>Notes, assignments, PPTs and useful files for Term-I subjects.</p>
+          <a href="#resources?term=1" class="btn btn-primary btn-sm">Open Term-I</a>
+        </div>
+
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-book"/></svg></span>
+          <h3 class="mt-16">Term-II Resources</h3>
+          <p>Resources will be uploaded soon.</p>
+          <a href="#resources?term=2" class="btn btn-soft btn-sm">View Coming Soon</a>
+        </div>
+
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-book"/></svg></span>
+          <h3 class="mt-16">Term-III Resources</h3>
+          <p>Resources will be uploaded soon.</p>
+          <a href="#resources?term=3" class="btn btn-soft btn-sm">View Coming Soon</a>
+        </div>
+
+        <div class="card hoverable card-tilt-green">
+          <span class="wrap-icon green"><svg width="22" height="22"><use href="#ic-briefcase"/></svg></span>
+          <h3 class="mt-16">Industry Handbook Series</h3>
+          <p>A curated series to understand major Indian industries.</p>
+          <a href="#handbook" class="btn btn-primary btn-sm">Explore Industries</a>
+        </div>
+
+        <div class="card hoverable card-tilt-yellow">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-users"/></svg></span>
+          <h3 class="mt-16">Meet the Founders</h3>
+          <p>The seniors who started GuruCool.</p>
+          <a href="#founders" class="btn btn-primary btn-sm">Know More</a>
+        </div>
+
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-mail"/></svg></span>
+          <h3 class="mt-16">Meet the Team</h3>
+          <p>The team carrying GuruCool 2.0 forward.</p>
+          <a href="#team" class="btn btn-primary btn-sm">Contact Team</a>
+        </div>
+
+        <div class="card hoverable card-tilt-rose">
+          <span class="wrap-icon rose"><svg width="22" height="22"><use href="#ic-upload"/></svg></span>
+          <h3 class="mt-16">Contribute Resources</h3>
+          <p>Coming soon — upload your own notes and help future batches.</p>
+          <a href="#contribute" class="btn btn-soft btn-sm">Coming Soon</a>
+        </div>
+
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= RESOURCES ================= -->
+  <section class="page relative" data-page="resources">
+    <div class="container">
+      <div class="breadcrumb"><a href="#dashboard">Home</a><span class="sep">&gt;</span><span class="current" id="breadcrumbTerm">Resources &middot; Term-I</span></div>
+    </div>
+
+    <section class="hero container" style="padding-top:12px;">
+      <span class="hero-badge">Everything you need, parked in one place</span>
+      <h1>Term-wise Academic Resources</h1>
+      <p class="lede" style="max-width:700px;">Notes, assignments and PPTs, organised trimester by trimester so you never have to go digging.</p>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <div class="tabs" data-tabgroup="term">
+        <button class="tab-btn active" data-tab="term-1" type="button">Term-I</button>
+        <button class="tab-btn" data-tab="term-2" type="button">Term-II</button>
+        <button class="tab-btn" data-tab="term-3" type="button">Term-III</button>
+      </div>
+
+      <!-- TERM I -->
+      <div class="tab-panel active" data-tabpanel="term-1" data-tabgroup="term">
+        <div class="search-bar mt-8" style="margin:0 0 24px;">
+          <svg width="18" height="18"><use href="#ic-search"/></svg>
+          <input type="search" data-filter-input="term1" placeholder="Filter Term-I subjects, code or faculty…">
+        </div>
+
+        <table class="resource-table">
+          <thead><tr><th>SL No.</th><th>Course Title</th><th>Code</th><th>Credits</th><th>Faculty</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr data-filter-item="term1" data-filter-text="microeconomics me ashutosh tripathi soumyakant mishra">
+              <td>1</td><td>Microeconomics</td><td>ME</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Ashutosh Tripathi</li><li>Prof. Soumyakant Mishra</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1uYFI_UBZLeKXAyto8Iz8mk9WFUvF6RqE?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+            <tr data-filter-item="term1" data-filter-text="legal aspects of business lab sujit pruseth">
+              <td>2</td><td>Legal Aspects of Business</td><td>LAB</td><td>1.5</td>
+              <td><ul class="faculty-list"><li>Prof. Sujit Pruseth</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1OkUHRLD8zs_d_bgwMKRRdhHUdI6DjUIf?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+            <tr data-filter-item="term1" data-filter-text="business communication bc kakoli sen mukta dutta">
+              <td>3</td><td>Business Communication</td><td>BC</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Kakoli Sen</li><li>Prof. Mukta Dutta</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1n0hb2vWlZBmxh-i5ZROKOO9VC94WKsBW?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+            <tr data-filter-item="term1" data-filter-text="financial accounting fa seema gupta diwahar nadar">
+              <td>4</td><td>Financial Accounting</td><td>FA</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Seema Gupta</li><li>Prof. Diwahar Nadar</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1meyKkmQY38oG1C8A9w1LnWmK2UKolkFS?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+            <tr data-filter-item="term1" data-filter-text="quantitative technique i qt-i saumayaranjan sahoo">
+              <td>5</td><td>Quantitative Technique - I</td><td>QT-I</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Saumayaranjan Sahoo</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1fjpcJDLk6ZnQOlM4aSM9RiBgz-wMSARF?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+            <tr data-filter-item="term1" data-filter-text="organizational behaviour i ob-i atri sengupta padmavathy dhillon">
+              <td>6</td><td>Organizational Behaviour - I</td><td>OB-I</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Atri Sengupta</li><li>Prof. Padmavathy Dhillon</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1j5hhRhbzz-MYwKVkpIiWBIu1lrHsfYW0?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+            <tr data-filter-item="term1" data-filter-text="marketing management i mm-i poonam kumar meta dev prasad murthy">
+              <td>7</td><td>Marketing Management - I</td><td>MM-I</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Poonam Kumar</li><li>Prof. Meta Dev Prasad Murthy</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1_JuqyEhRqxmnckpDPYOdFXcDr168LeDT?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+            <tr data-filter-item="term1" data-filter-text="managerial computing mncmp deepanwita datta">
+              <td>8</td><td>Managerial Computing</td><td>MNCMP</td><td>1.5</td>
+              <td><ul class="faculty-list"><li>Prof. Deepanwita Datta</li></ul></td>
+              <td><span class="badge badge-available">Resource Link Available</span></td>
+              <td><a href="https://drive.google.com/drive/folders/1y8Ifv8HuNDufOxJQDPha5o_2KSczhJCb?usp=sharing" class="btn btn-primary btn-sm" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#ic-folder"/></svg> Open Folder</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="resource-cards">
+          <div class="r-card" data-filter-item="term1" data-filter-text="microeconomics me ashutosh tripathi soumyakant mishra">
+            <div class="r-card-top"><h4>1. Microeconomics</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> ME &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Ashutosh Tripathi</li><li>Prof. Soumyakant Mishra</li></ul>
+            <a href="https://drive.google.com/drive/folders/1uYFI_UBZLeKXAyto8Iz8mk9WFUvF6RqE?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+          <div class="r-card" data-filter-item="term1" data-filter-text="legal aspects of business lab sujit pruseth">
+            <div class="r-card-top"><h4>2. Legal Aspects of Business</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> LAB &nbsp;·&nbsp; <b>Credits:</b> 1.5</div>
+            <ul class="faculty-list"><li>Prof. Sujit Pruseth</li></ul>
+            <a href="https://drive.google.com/drive/folders/1OkUHRLD8zs_d_bgwMKRRdhHUdI6DjUIf?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+          <div class="r-card" data-filter-item="term1" data-filter-text="business communication bc kakoli sen mukta dutta">
+            <div class="r-card-top"><h4>3. Business Communication</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> BC &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Kakoli Sen</li><li>Prof. Mukta Dutta</li></ul>
+            <a href="https://drive.google.com/drive/folders/1n0hb2vWlZBmxh-i5ZROKOO9VC94WKsBW?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+          <div class="r-card" data-filter-item="term1" data-filter-text="financial accounting fa seema gupta diwahar nadar">
+            <div class="r-card-top"><h4>4. Financial Accounting</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> FA &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Seema Gupta</li><li>Prof. Diwahar Nadar</li></ul>
+            <a href="https://drive.google.com/drive/folders/1meyKkmQY38oG1C8A9w1LnWmK2UKolkFS?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+          <div class="r-card" data-filter-item="term1" data-filter-text="quantitative technique i qt-i saumayaranjan sahoo">
+            <div class="r-card-top"><h4>5. Quantitative Technique - I</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> QT-I &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Saumayaranjan Sahoo</li></ul>
+            <a href="https://drive.google.com/drive/folders/1fjpcJDLk6ZnQOlM4aSM9RiBgz-wMSARF?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+          <div class="r-card" data-filter-item="term1" data-filter-text="organizational behaviour i ob-i atri sengupta padmavathy dhillon">
+            <div class="r-card-top"><h4>6. Organizational Behaviour - I</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> OB-I &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Atri Sengupta</li><li>Prof. Padmavathy Dhillon</li></ul>
+            <a href="https://drive.google.com/drive/folders/1j5hhRhbzz-MYwKVkpIiWBIu1lrHsfYW0?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+          <div class="r-card" data-filter-item="term1" data-filter-text="marketing management i mm-i poonam kumar meta dev prasad murthy">
+            <div class="r-card-top"><h4>7. Marketing Management - I</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> MM-I &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Poonam Kumar</li><li>Prof. Meta Dev Prasad Murthy</li></ul>
+            <a href="https://drive.google.com/drive/folders/1_JuqyEhRqxmnckpDPYOdFXcDr168LeDT?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+          <div class="r-card" data-filter-item="term1" data-filter-text="managerial computing mncmp deepanwita datta">
+            <div class="r-card-top"><h4>8. Managerial Computing</h4><span class="badge badge-available">Available</span></div>
+            <div class="r-card-meta"><b>Code:</b> MNCMP &nbsp;·&nbsp; <b>Credits:</b> 1.5</div>
+            <ul class="faculty-list"><li>Prof. Deepanwita Datta</li></ul>
+            <a href="https://drive.google.com/drive/folders/1y8Ifv8HuNDufOxJQDPha5o_2KSczhJCb?usp=sharing" class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener">Open Folder</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TERM II -->
+      <div class="tab-panel" data-tabpanel="term-2" data-tabgroup="term">
+        <div class="sticky-note mt-8" style="margin-bottom:24px;">
+          <p class="mb-0">Resources are being uploaded with care. Term-II folders will unlock here soon — check back!</p>
+        </div>
+        <div class="search-bar" style="margin:0 0 24px;">
+          <svg width="18" height="18"><use href="#ic-search"/></svg>
+          <input type="search" data-filter-input="term2" placeholder="Filter Term-II subjects, code or faculty…">
+        </div>
+
+        <table class="resource-table">
+          <thead><tr><th>SL No.</th><th>Course Title</th><th>Code</th><th>Credits</th><th>Faculty</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr data-filter-item="term2" data-filter-text="operations management i om-i kaustov chakraborty">
+              <td>1</td><td>Operations Management-I</td><td>OM-I</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Kaustov Chakraborty</li></ul></td>
+              <td><span class="badge badge-soon">Coming Soon</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term2" data-filter-text="macroeconomic analysis mea sudhir jain hemachandra padhan wasim ahmed">
+              <td>2</td><td>Macroeconomic Analysis</td><td>MEA</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Sudhir Jain</li><li>Prof. Hemachandra Padhan</li><li>Prof. Wasim Ahmed</li></ul></td>
+              <td><span class="badge badge-upload">Under Upload</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term2" data-filter-text="marketing management ii mm-ii atul prashar nitin soni">
+              <td>3</td><td>Marketing Management - II</td><td>MM-II</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Atul Prashar</li><li>Prof. Nitin Soni</li></ul></td>
+              <td><span class="badge badge-curated">Being Curated</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term2" data-filter-text="organizational behaviour ii ob-ii shikha bhardwaj">
+              <td>4</td><td>Organizational Behaviour - II</td><td>OB-II</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Shikha Bhardwaj</li></ul></td>
+              <td><span class="badge badge-soon">Coming Soon</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term2" data-filter-text="financial management i fm-i rahul kumar">
+              <td>5</td><td>Financial Management - I</td><td>FM-I</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Rahul Kumar</li></ul></td>
+              <td><span class="badge badge-upload">Under Upload</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term2" data-filter-text="written analysis and communication wac rihana shaik">
+              <td>6</td><td>Written Analysis and Communication</td><td>WAC</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Rihana Shaik</li></ul></td>
+              <td><span class="badge badge-curated">Being Curated</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term2" data-filter-text="quantitative techniques ii qt-ii shweta singh sourabh kumar">
+              <td>7</td><td>Quantitative Techniques - II</td><td>QT-II</td><td>1.5</td>
+              <td><ul class="faculty-list"><li>Prof. Shweta Singh</li><li>Prof. Sourabh Kumar</li></ul></td>
+              <td><span class="badge badge-soon">Coming Soon</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term2" data-filter-text="management accounting ma nishi malhotra">
+              <td>8</td><td>Management Accounting</td><td>MA</td><td>1.5</td>
+              <td><ul class="faculty-list"><li>Prof. Nishi Malhotra</li></ul></td>
+              <td><span class="badge badge-upload">Under Upload</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="resource-cards">
+          <div class="r-card" data-filter-item="term2" data-filter-text="operations management i om-i kaustov chakraborty">
+            <div class="r-card-top"><h4>1. Operations Management-I</h4><span class="badge badge-soon">Coming Soon</span></div>
+            <div class="r-card-meta"><b>Code:</b> OM-I &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Kaustov Chakraborty</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term2" data-filter-text="macroeconomic analysis mea sudhir jain hemachandra padhan wasim ahmed">
+            <div class="r-card-top"><h4>2. Macroeconomic Analysis</h4><span class="badge badge-upload">Under Upload</span></div>
+            <div class="r-card-meta"><b>Code:</b> MEA &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Sudhir Jain</li><li>Prof. Hemachandra Padhan</li><li>Prof. Wasim Ahmed</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term2" data-filter-text="marketing management ii mm-ii atul prashar nitin soni">
+            <div class="r-card-top"><h4>3. Marketing Management - II</h4><span class="badge badge-curated">Being Curated</span></div>
+            <div class="r-card-meta"><b>Code:</b> MM-II &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Atul Prashar</li><li>Prof. Nitin Soni</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term2" data-filter-text="organizational behaviour ii ob-ii shikha bhardwaj">
+            <div class="r-card-top"><h4>4. Organizational Behaviour - II</h4><span class="badge badge-soon">Coming Soon</span></div>
+            <div class="r-card-meta"><b>Code:</b> OB-II &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Shikha Bhardwaj</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term2" data-filter-text="financial management i fm-i rahul kumar">
+            <div class="r-card-top"><h4>5. Financial Management - I</h4><span class="badge badge-upload">Under Upload</span></div>
+            <div class="r-card-meta"><b>Code:</b> FM-I &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Rahul Kumar</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term2" data-filter-text="written analysis and communication wac rihana shaik">
+            <div class="r-card-top"><h4>6. Written Analysis and Communication</h4><span class="badge badge-curated">Being Curated</span></div>
+            <div class="r-card-meta"><b>Code:</b> WAC &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Rihana Shaik</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term2" data-filter-text="quantitative techniques ii qt-ii shweta singh sourabh kumar">
+            <div class="r-card-top"><h4>7. Quantitative Techniques - II</h4><span class="badge badge-soon">Coming Soon</span></div>
+            <div class="r-card-meta"><b>Code:</b> QT-II &nbsp;·&nbsp; <b>Credits:</b> 1.5</div>
+            <ul class="faculty-list"><li>Prof. Shweta Singh</li><li>Prof. Sourabh Kumar</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term2" data-filter-text="management accounting ma nishi malhotra">
+            <div class="r-card-top"><h4>8. Management Accounting</h4><span class="badge badge-upload">Under Upload</span></div>
+            <div class="r-card-meta"><b>Code:</b> MA &nbsp;·&nbsp; <b>Credits:</b> 1.5</div>
+            <ul class="faculty-list"><li>Prof. Nishi Malhotra</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TERM III -->
+      <div class="tab-panel" data-tabpanel="term-3" data-tabgroup="term">
+        <div class="sticky-note mt-8" style="margin-bottom:24px;">
+          <p class="mb-0">Coming soon — because good things take a little curation. Term-III is on its way.</p>
+        </div>
+        <div class="search-bar" style="margin:0 0 24px;">
+          <svg width="18" height="18"><use href="#ic-search"/></svg>
+          <input type="search" data-filter-input="term3" placeholder="Filter Term-III subjects, code or faculty…">
+        </div>
+
+        <table class="resource-table">
+          <thead><tr><th>SL No.</th><th>Course Title</th><th>Code</th><th>Credits</th><th>Faculty</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr data-filter-item="term3" data-filter-text="operations management ii om-ii ramakrushna padhy rohit gupta">
+              <td>1</td><td>Operations Management - II</td><td>OM-II</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Ramakrushna Padhy</li><li>Prof. Rohit Gupta</li></ul></td>
+              <td><span class="badge badge-soon">Coming Soon</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term3" data-filter-text="financial management ii fm-ii soumya guha deb meena bhatia">
+              <td>2</td><td>Financial Management - II</td><td>FM-II</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Soumya Guha Deb</li><li>Prof. Meena Bhatia</li></ul></td>
+              <td><span class="badge badge-upload">Under Upload</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term3" data-filter-text="human resource management hrm roli sehgal shubhi gupta">
+              <td>3</td><td>Human Resource Management</td><td>HRM</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Roli Sehgal</li><li>Prof. Shubhi Gupta</li></ul></td>
+              <td><span class="badge badge-curated">Being Curated</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term3" data-filter-text="strategic management strm diptiranjan mahapatra aqueeb sohail shaik">
+              <td>4</td><td>Strategic Management</td><td>STRM</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Diptiranjan Mahapatra</li><li>Prof. Aqueeb Sohail Shaik</li></ul></td>
+              <td><span class="badge badge-soon">Coming Soon</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term3" data-filter-text="management information systems mis siddharth gourav majhi merlin nandy">
+              <td>5</td><td>Management Information Systems</td><td>MIS</td><td>3</td>
+              <td><ul class="faculty-list"><li>Prof. Siddharth Gourav Majhi</li><li>Prof. Merlin Nandy</li></ul></td>
+              <td><span class="badge badge-upload">Under Upload</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term3" data-filter-text="marketing research mr sandip mukhopadhyay meta dev prasad murthy">
+              <td>6</td><td>Marketing Research</td><td>MR</td><td>1.5</td>
+              <td><ul class="faculty-list"><li>Prof. Sandip Mukhopadhyay</li><li>Prof. Meta Dev Prasad Murthy</li></ul></td>
+              <td><span class="badge badge-curated">Being Curated</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+            <tr data-filter-item="term3" data-filter-text="business ethics be sumita sindhi">
+              <td>7</td><td>Business Ethics</td><td>BE</td><td>1.5</td>
+              <td><ul class="faculty-list"><li>Prof. Sumita Sindhi</li></ul></td>
+              <td><span class="badge badge-soon">Coming Soon</span></td>
+              <td><button class="btn btn-sm is-disabled" disabled>Coming Soon</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="resource-cards">
+          <div class="r-card" data-filter-item="term3" data-filter-text="operations management ii om-ii ramakrushna padhy rohit gupta">
+            <div class="r-card-top"><h4>1. Operations Management - II</h4><span class="badge badge-soon">Coming Soon</span></div>
+            <div class="r-card-meta"><b>Code:</b> OM-II &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Ramakrushna Padhy</li><li>Prof. Rohit Gupta</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term3" data-filter-text="financial management ii fm-ii soumya guha deb meena bhatia">
+            <div class="r-card-top"><h4>2. Financial Management - II</h4><span class="badge badge-upload">Under Upload</span></div>
+            <div class="r-card-meta"><b>Code:</b> FM-II &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Soumya Guha Deb</li><li>Prof. Meena Bhatia</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term3" data-filter-text="human resource management hrm roli sehgal shubhi gupta">
+            <div class="r-card-top"><h4>3. Human Resource Management</h4><span class="badge badge-curated">Being Curated</span></div>
+            <div class="r-card-meta"><b>Code:</b> HRM &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Roli Sehgal</li><li>Prof. Shubhi Gupta</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term3" data-filter-text="strategic management strm diptiranjan mahapatra aqueeb sohail shaik">
+            <div class="r-card-top"><h4>4. Strategic Management</h4><span class="badge badge-soon">Coming Soon</span></div>
+            <div class="r-card-meta"><b>Code:</b> STRM &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Diptiranjan Mahapatra</li><li>Prof. Aqueeb Sohail Shaik</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term3" data-filter-text="management information systems mis siddharth gourav majhi merlin nandy">
+            <div class="r-card-top"><h4>5. Management Information Systems</h4><span class="badge badge-upload">Under Upload</span></div>
+            <div class="r-card-meta"><b>Code:</b> MIS &nbsp;·&nbsp; <b>Credits:</b> 3</div>
+            <ul class="faculty-list"><li>Prof. Siddharth Gourav Majhi</li><li>Prof. Merlin Nandy</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term3" data-filter-text="marketing research mr sandip mukhopadhyay meta dev prasad murthy">
+            <div class="r-card-top"><h4>6. Marketing Research</h4><span class="badge badge-curated">Being Curated</span></div>
+            <div class="r-card-meta"><b>Code:</b> MR &nbsp;·&nbsp; <b>Credits:</b> 1.5</div>
+            <ul class="faculty-list"><li>Prof. Sandip Mukhopadhyay</li><li>Prof. Meta Dev Prasad Murthy</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+          <div class="r-card" data-filter-item="term3" data-filter-text="business ethics be sumita sindhi">
+            <div class="r-card-top"><h4>7. Business Ethics</h4><span class="badge badge-soon">Coming Soon</span></div>
+            <div class="r-card-meta"><b>Code:</b> BE &nbsp;·&nbsp; <b>Credits:</b> 1.5</div>
+            <ul class="faculty-list"><li>Prof. Sumita Sindhi</li></ul>
+            <button class="btn btn-sm btn-block is-disabled" disabled>Coming Soon</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= INDUSTRY HANDBOOK ================= -->
+  <section class="page relative" data-page="handbook">
+    <div class="container">
+      <div class="breadcrumb"><a href="#dashboard">Home</a><span class="sep">&gt;</span><span class="current">Industry Handbook</span></div>
+    </div>
+
+    <section class="hero container" style="padding-top:12px;">
+      <span class="hero-badge">Senior Gyaan, Sector by Sector</span>
+      <h1>Industry Handbook Series</h1>
+      <p class="lede" style="max-width:760px;">A growing collection of simplified industry explainers to help you understand major Indian sectors, business models, trends, players, challenges, and opportunities.</p>
+
+      <div class="search-bar mt-24">
+        <svg width="18" height="18"><use href="#ic-search"/></svg>
+        <input type="search" data-filter-input="handbook" placeholder="Search an industry, e.g. Banking, EV, FMCG…">
+      </div>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <div class="grid grid-2" id="handbookGrid">
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian automotive industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Automotive Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian airline industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Airline Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable card-tilt-green" data-filter-item="handbook" data-filter-text="indian banking industry">
+          <div class="flex-between mb-0"><span class="wrap-icon green"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-available">Available</span></div>
+          <h3 class="mt-16">Indian Banking Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-primary btn-sm" onclick="gcOpenModal('Indian Banking Industry','This handbook is being finalized by seniors — the full write-up on players, business models and trends will appear here soon.')">Read Handbook</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian cement industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Cement Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian defence manufacturing industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-curated">Being Curated</span></div>
+          <h3 class="mt-16">Indian Defence Manufacturing Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable card-tilt-green" data-filter-item="handbook" data-filter-text="indian e-commerce industry ecommerce">
+          <div class="flex-between mb-0"><span class="wrap-icon green"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-available">Available</span></div>
+          <h3 class="mt-16">Indian E-Commerce Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-primary btn-sm" onclick="gcOpenModal('Indian E-Commerce Industry','This handbook is being finalized by seniors — the full write-up on players, business models and trends will appear here soon.')">Read Handbook</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian ed-tech industry edtech">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Ed-Tech Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian ev industry electric vehicle">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-upload">Under Upload</span></div>
+          <h3 class="mt-16">Indian EV Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable card-tilt-green" data-filter-item="handbook" data-filter-text="indian fmcg industry">
+          <div class="flex-between mb-0"><span class="wrap-icon green"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-available">Available</span></div>
+          <h3 class="mt-16">Indian FMCG Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-primary btn-sm" onclick="gcOpenModal('Indian FMCG Industry','This handbook is being finalized by seniors — the full write-up on players, business models and trends will appear here soon.')">Read Handbook</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian food delivery industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Food Delivery Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian healthcare industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-curated">Being Curated</span></div>
+          <h3 class="mt-16">Indian Healthcare Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian hospitality industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Hospitality Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable card-tilt-green" data-filter-item="handbook" data-filter-text="indian it industry information technology">
+          <div class="flex-between mb-0"><span class="wrap-icon green"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-available">Available</span></div>
+          <h3 class="mt-16">Indian IT Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-primary btn-sm" onclick="gcOpenModal('Indian IT Industry','This handbook is being finalized by seniors — the full write-up on players, business models and trends will appear here soon.')">Read Handbook</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian logistics industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-upload">Under Upload</span></div>
+          <h3 class="mt-16">Indian Logistics Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian media entertainment industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Media &amp; Entertainment Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian nbfc industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-curated">Being Curated</span></div>
+          <h3 class="mt-16">Indian NBFC Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian oil gas industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Oil &amp; Gas Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian pharmaceutical industry pharma">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-upload">Under Upload</span></div>
+          <h3 class="mt-16">Indian Pharmaceutical Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian power industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-soon">Coming Soon</span></div>
+          <h3 class="mt-16">Indian Power Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable" data-filter-item="handbook" data-filter-text="indian telecom industry">
+          <div class="flex-between mb-0"><span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span><span class="badge badge-curated">Being Curated</span></div>
+          <h3 class="mt-16">Indian Telecom Industry</h3>
+          <p>Curated industry notes and insights.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+      </div>
+      <p class="text-center text-muted hidden" data-filter-empty="handbook" style="margin-top:20px;">No industries match your search just yet — try another keyword.</p>
+    </section>
+  </section>
+
+  <!-- ================= FOUNDERS ================= -->
+  <section class="page relative" data-page="founders">
+    <div class="container">
+      <div class="breadcrumb"><a href="#dashboard">Home</a><span class="sep">&gt;</span><span class="current">Founders</span></div>
+    </div>
+
+    <svg class="doodle" style="top:8%; left:5%; width:42px; height:42px;" aria-hidden="true"><use href="#ic-star"/></svg>
+    <svg class="doodle dim-green" style="top:12%; right:6%; width:46px; height:46px; transform:rotate(10deg);" aria-hidden="true"><use href="#ic-bookmark"/></svg>
+
+    <section class="hero container" style="padding-top:12px;">
+      <span class="hero-badge">Built by Seniors, For Juniors</span>
+      <h1>Meet the Founders of GuruCool</h1>
+      <p class="lede" style="max-width:760px;">GuruCool began with seniors who understood the struggle of finding the right resources at the right time. They created the first version of the platform so juniors could study smarter, save time, and feel supported.</p>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <div class="grid grid-2">
+        <div class="card hoverable profile-card">
+          <div class="profile-avatar">RS</div>
+          <div class="profile-name">Rashi Srivastava</div>
+          <div class="profile-role">IT Consultant, triSys</div>
+          <div class="profile-meta">MBA Batch 2024&ndash;26 &middot; IIM Sambalpur</div>
+          <p class="profile-quote">&ldquo;To be an institute par excellence.&rdquo;</p>
+        </div>
+        <div class="card hoverable profile-card">
+          <div class="profile-avatar">D</div>
+          <div class="profile-name">Deepti</div>
+          <div class="profile-role">Product MT, Niva Bupa Health Insurance</div>
+          <div class="profile-meta">MBA Batch 2024&ndash;26 &middot; IIM Sambalpur</div>
+          <p class="profile-quote">&ldquo;To be an institute par excellence.&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="sticky-note green mt-32" style="max-width:720px; margin-left:auto; margin-right:auto;">
+        <span class="wrap-icon green mb-0" style="margin-bottom:10px;"><svg width="18" height="18"><use href="#ic-heart"/></svg></span>
+        <p class="mb-0">GuruCool 2.0 is built on the foundation created by our seniors. Their initiative made academic resources easier to access, and we hope to carry that legacy forward with the same intention.</p>
+      </div>
+
+      <div class="flex-center gap-16 mt-32" style="flex-wrap:wrap;">
+        <a href="#team" class="btn btn-primary">Meet the Team Behind 2.0</a>
+        <a href="#resources" class="btn btn-secondary">Back to Resources</a>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= TEAM / CONTACT ================= -->
+  <section class="page relative" data-page="team">
+    <div class="container">
+      <div class="breadcrumb"><a href="#dashboard">Home</a><span class="sep">&gt;</span><span class="current">Team &amp; Contact</span></div>
+    </div>
+
+    <svg class="doodle" style="top:8%; right:6%; width:44px; height:44px;" aria-hidden="true"><use href="#ic-star"/></svg>
+
+    <section class="hero container" style="padding-top:12px;">
+      <span class="hero-badge">Your Academic Buddy at IIM Sambalpur</span>
+      <h1>Meet the Team Behind GuruCool 2.0</h1>
+      <p class="lede" style="max-width:760px;">We are carrying this forward for the junior batch with the same purpose — to make the MBA journey a little less confusing and a lot more supported.</p>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <div class="grid grid-2">
+        <div class="card hoverable profile-card">
+          <div class="profile-avatar">SA</div>
+          <div class="profile-name">Saleh Ahmed</div>
+          <div class="profile-role">GuruCool 2.0 Team</div>
+          <div class="profile-meta">MBA Batch 2025&ndash;27 &middot; IIM Sambalpur</div>
+          <p class="profile-quote">&ldquo;To be an institute par excellence.&rdquo;</p>
+        </div>
+        <div class="card hoverable profile-card">
+          <div class="profile-avatar">SD</div>
+          <div class="profile-name">Subhchandan Das</div>
+          <div class="profile-role">GuruCool 2.0 Team</div>
+          <div class="profile-meta">MBA Batch 2025&ndash;27 &middot; IIM Sambalpur</div>
+          <p class="profile-quote">&ldquo;To be an institute par excellence.&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="card hoverable mt-32 card-tilt-yellow" style="max-width:760px; margin-left:auto; margin-right:auto; text-align:center;">
+        <span class="wrap-icon"><svg width="22" height="22"><use href="#ic-mail"/></svg></span>
+        <h3 class="mt-16">Have questions, feedback, missing resources, or suggestions?</h3>
+        <p>We'd love to hear from you — this platform grows better with your notes.</p>
+        <button class="btn btn-primary" onclick="gcOpenModal('Contact GuruCool Team','We are setting up a proper contact form for you. Until then, reach out to any of the GuruCool 2.0 team members directly on campus — we promise a warm reply!')">Contact GuruCool Team</button>
+
+        <div class="grid grid-3 mt-32" style="text-align:left;">
+          <div class="flex gap-10" style="align-items:center;">
+            <span class="wrap-icon"><svg width="18" height="18"><use href="#ic-mail"/></svg></span>
+            <div><b>Email</b><br><span class="text-muted" style="font-size:14px;">Linking soon</span></div>
+          </div>
+          <div class="flex gap-10" style="align-items:center;">
+            <span class="wrap-icon green"><svg width="18" height="18"><use href="#ic-linkedin"/></svg></span>
+            <div><b>LinkedIn</b><br><span class="text-muted" style="font-size:14px;">Linking soon</span></div>
+          </div>
+          <div class="flex gap-10" style="align-items:center;">
+            <span class="wrap-icon rose"><svg width="18" height="18"><use href="#ic-chat"/></svg></span>
+            <div><b>WhatsApp / Form</b><br><span class="text-muted" style="font-size:14px;">Linking soon</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= CONTRIBUTE ================= -->
+  <section class="page relative" data-page="contribute">
+    <div class="container">
+      <div class="breadcrumb"><a href="#dashboard">Home</a><span class="sep">&gt;</span><span class="current">Contribute</span></div>
+    </div>
+
+    <svg class="doodle" style="top:8%; left:6%; width:44px; height:44px; transform:rotate(-10deg);" aria-hidden="true"><use href="#ic-paperclip"/></svg>
+    <svg class="doodle dim-green" style="top:10%; right:6%; width:44px; height:44px;" aria-hidden="true"><use href="#ic-star"/></svg>
+
+    <section class="hero container" style="padding-top:12px;">
+      <span class="hero-badge">Coming Soon</span>
+      <h1>Contribute to GuruCool</h1>
+      <p class="lede" style="max-width:720px;">GuruCool becomes stronger when students contribute. Soon, you will be able to upload your own notes, assignment references, PPTs, project learnings, and exam preparation tips to help your batchmates and future juniors.</p>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <div class="card" style="max-width:640px; margin:0 auto;">
+        <div class="sticky-note mt-8" style="margin-bottom:26px;">
+          <p class="mb-0">This feature is coming soon. Feel free to explore the form below — nothing will be uploaded just yet.</p>
+        </div>
+
+        <form id="contributeForm" novalidate>
+          <div class="form-group">
+            <label for="contribTerm">Select Term</label>
+            <select id="contribTerm">
+              <option value="">Choose a term…</option>
+              <option>Term-I</option>
+              <option>Term-II</option>
+              <option>Term-III</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contribSubject">Select Subject</label>
+            <select id="contribSubject">
+              <option value="">Choose a subject…</option>
+              <option>Microeconomics</option>
+              <option>Business Communication</option>
+              <option>Financial Accounting</option>
+              <option>Operations Management</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Resource Type</label>
+            <div class="pill-row">
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Notes</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Assignment</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> PPT</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Project Reference</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Exam Tips</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Other</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contribFile">Upload File</label>
+            <button type="button" class="btn btn-soft btn-block is-disabled" disabled title="Uploading is coming soon">
+              <svg width="16" height="16"><use href="#ic-upload"/></svg> Choose a file (coming soon)
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="contribDesc">Add Description</label>
+            <textarea id="contribDesc" rows="4" placeholder="Tell us a little about this resource…"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-block is-disabled" disabled>Upload Coming Soon</button>
+          <p class="text-center text-muted mt-16 mb-0" style="font-size:14px;">Resources are being uploaded with care — good things take a little curation.</p>
+        </form>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= ADMIN ================= -->
+  <section class="page relative" data-page="admin">
+    <svg class="doodle" style="top:6%; right:6%; width:44px; height:44px;" aria-hidden="true"><use href="#ic-star"/></svg>
+
+    <section class="hero container">
+      <span class="hero-badge badge-admin" style="display:inline-flex;">Master Access</span>
+      <h1>Welcome back, Admin</h1>
+      <p class="lede" style="max-width:720px;">This is the control room for GuruCool 2.0 — a quiet place to keep an eye on what's live, what's still being curated, and what juniors are actually seeing.</p>
+
+      <div class="sticky-note mt-24" style="max-width:640px;">
+        <p class="mb-0">Admin tools are being wired up one screen at a time. For now this page gives you a live snapshot of the platform — full editing actions are coming soon.</p>
+      </div>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <h3>At a glance</h3>
+      <div class="grid grid-4 mt-16">
+        <div class="stat-tile">
+          <div class="stat-num">8<span style="font-size:18px; color:var(--navy-soft);">/23</span></div>
+          <div class="stat-label">Term subjects live</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-num">4<span style="font-size:18px; color:var(--navy-soft);">/20</span></div>
+          <div class="stat-label">Industry handbooks published</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Contributions pending review</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-num">128</div>
+          <div class="stat-label">Registered juniors (demo data)</div>
+        </div>
+      </div>
+      <p class="text-muted mt-8" style="font-size:13.5px;">Numbers above are illustrative for this prototype — live counts will sync once GuruCool is connected to a real backend.</p>
+    </section>
+
+    <section class="section container" style="padding-top:0;">
+      <h3>Manage the platform</h3>
+      <div class="grid grid-3 mt-16">
+
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="20" height="20"><use href="#ic-book"/></svg></span>
+          <div class="admin-card-head mt-16">
+            <h4 class="mb-0">Term-wise Resources</h4>
+            <span class="badge badge-available">8/23 live</span>
+          </div>
+          <div class="admin-progress"><div class="admin-progress-fill" style="width:35%;"></div></div>
+          <p>Term-I is fully live with real Drive folders. Term-II and Term-III are still being collected from seniors.</p>
+          <a href="#resources" class="btn btn-secondary btn-sm">Review Live Page</a>
+        </div>
+
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span>
+          <div class="admin-card-head mt-16">
+            <h4 class="mb-0">Industry Handbook</h4>
+            <span class="badge badge-soon">4/20 live</span>
+          </div>
+          <div class="admin-progress"><div class="admin-progress-fill" style="width:20%;"></div></div>
+          <p>Banking, E-Commerce, FMCG and IT are published. The rest are being drafted by seniors sector by sector.</p>
+          <a href="#handbook" class="btn btn-secondary btn-sm">Review Live Page</a>
+        </div>
+
+        <div class="card hoverable">
+          <span class="wrap-icon rose"><svg width="20" height="20"><use href="#ic-upload"/></svg></span>
+          <div class="admin-card-head mt-16">
+            <h4 class="mb-0">Contribute Queue</h4>
+            <span class="badge badge-curated">Not open yet</span>
+          </div>
+          <p class="mt-16">Student uploads aren't switched on yet, so there's nothing waiting for review — but the form is ready for when they are.</p>
+          <a href="#contribute" class="btn btn-secondary btn-sm">Preview Submission Form</a>
+        </div>
+
+        <div class="card hoverable card-tilt-green">
+          <span class="wrap-icon green"><svg width="20" height="20"><use href="#ic-users"/></svg></span>
+          <div class="admin-card-head mt-16">
+            <h4 class="mb-0">Founders &amp; Team</h4>
+            <span class="badge badge-available">4 profiles live</span>
+          </div>
+          <p class="mt-16">2 founder profiles and 2 current team profiles are live and up to date.</p>
+          <div class="pill-row">
+            <a href="#founders" class="btn btn-secondary btn-sm">Founders Page</a>
+            <a href="#team" class="btn btn-secondary btn-sm">Team Page</a>
+          </div>
+        </div>
+
+        <div class="card hoverable card-tilt-yellow">
+          <span class="wrap-icon"><svg width="20" height="20"><use href="#ic-users"/></svg></span>
+          <div class="admin-card-head mt-16">
+            <h4 class="mb-0">Registered Users</h4>
+            <span class="badge badge-curated">Demo data</span>
+          </div>
+          <p class="mt-16">128 juniors have created a GuruCool account so far. Full user management — search, roles, exports — is on the way.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="card hoverable">
+          <span class="wrap-icon"><svg width="20" height="20"><use href="#ic-inbox"/></svg></span>
+          <div class="admin-card-head mt-16">
+            <h4 class="mb-0">Messages &amp; Feedback</h4>
+            <span class="badge badge-soon">Not live yet</span>
+          </div>
+          <p class="mt-16">Contact form submissions from the Team page will land here once that form is connected.</p>
+          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+        </div>
+
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-love">Made with care by seniors who have been exactly where you are.</p>
+  <p>GuruCool 2.0 &middot; IIM Sambalpur</p>
+</footer>
+
+<div class="modal-overlay" id="gcModal">
+  <div class="modal-box card">
+    <button class="modal-close" onclick="gcCloseModal()" aria-label="Close">&times;</button>
+    <span class="wrap-icon"><svg width="20" height="20"><use href="#ic-heart"/></svg></span>
+    <h3 class="mt-16" id="gcModalTitle"></h3>
+    <p id="gcModalBody"></p>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
