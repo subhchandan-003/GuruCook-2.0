@@ -165,6 +165,68 @@
     }
   }
 
+  /* ---------------- Admin: registered users roster + remove ---------------- */
+  function loadRegisteredUsers() {
+    var listEl = document.getElementById("registeredUsersList");
+    if (!listEl) return;
+
+    supabaseClient
+      .from("profiles")
+      .select("id, email, full_name, role, login_count, created_at")
+      .order("created_at", { ascending: false })
+      .then(function (res) {
+        if (res.error || !res.data || res.data.length === 0) {
+          listEl.innerHTML = '<p class="text-muted mb-0">No registered users yet.</p>';
+          return;
+        }
+        listEl.innerHTML = res.data
+          .map(function (row) {
+            var joined = new Date(row.created_at).toLocaleDateString(undefined, { dateStyle: "medium" });
+            var isSelf = currentUser && row.id === currentUser.id;
+            var roleBadge = row.role === "admin" ? '<span class="badge badge-admin">Admin</span>' : '<span class="badge badge-available">Student</span>';
+            var removeBtn = isSelf
+              ? '<button class="btn btn-sm is-disabled" disabled title="You can\'t remove your own account">Remove</button>'
+              : '<button class="btn btn-sm btn-danger" data-remove-user="' + escapeHtml(row.id) + '" data-remove-email="' + escapeHtml(row.email) + '">Remove</button>';
+            return (
+              '<div class="user-roster-row">' +
+              '<div class="ur-info">' +
+              '<div class="ur-top"><span class="ur-email">' + escapeHtml(row.full_name || row.email) + "</span>" + roleBadge + "</div>" +
+              '<span class="ur-meta">' + escapeHtml(row.email) + " · Joined " + escapeHtml(joined) + " · " + (row.login_count || 0) + " logins</span>" +
+              '<span class="ur-id">ID: ' + escapeHtml(row.id) + "</span>" +
+              "</div>" +
+              removeBtn +
+              "</div>"
+            );
+          })
+          .join("");
+      });
+  }
+
+  function removeUser(id, email) {
+    var confirmed = window.confirm(
+      "Remove " + email + "?\n\nThis permanently deletes their account and all their login activity. This cannot be undone."
+    );
+    if (!confirmed) return;
+
+    supabaseClient.rpc("admin_delete_user", { target_id: id }).then(function (res) {
+      if (res.error) {
+        window.alert("Couldn't remove this user: " + res.error.message);
+        return;
+      }
+      loadRegisteredUsers();
+      loadAdminStats();
+    });
+  }
+
+  var registeredUsersList = document.getElementById("registeredUsersList");
+  if (registeredUsersList) {
+    registeredUsersList.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-remove-user]");
+      if (!btn) return;
+      removeUser(btn.getAttribute("data-remove-user"), btn.getAttribute("data-remove-email"));
+    });
+  }
+
   function render() {
     var parsed = parseHash();
     var route = ROUTES.indexOf(parsed.route) !== -1 ? parsed.route : "login";
@@ -195,7 +257,10 @@
       syncResourceBreadcrumb();
     }
 
-    if (route === "admin") loadAdminStats();
+    if (route === "admin") {
+      loadAdminStats();
+      loadRegisteredUsers();
+    }
 
     window.scrollTo(0, 0);
   }

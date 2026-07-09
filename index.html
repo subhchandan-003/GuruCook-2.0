@@ -1006,6 +1006,16 @@
       </div>
     </section>
 
+    <section class="section container" style="padding-top:0;" id="registeredUsersSection">
+      <h3>Registered users</h3>
+      <p class="text-muted" style="font-size:14.5px;">Everyone who's signed up, newest first. Removing a user permanently deletes their account and all their activity — this can't be undone.</p>
+      <div class="card mt-16" id="registeredUsersCard">
+        <div id="registeredUsersList" class="user-roster-list">
+          <p class="text-muted mb-0">Loading registered users…</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section container" style="padding-top:0;">
       <h3>Manage the platform</h3>
       <div class="grid grid-3 mt-16">
@@ -1059,10 +1069,10 @@
           <span class="wrap-icon"><svg width="20" height="20"><use href="#ic-users"/></svg></span>
           <div class="admin-card-head mt-16">
             <h4 class="mb-0">Registered Users</h4>
-            <span class="badge badge-curated">Demo data</span>
+            <span class="badge badge-available">Live</span>
           </div>
-          <p class="mt-16">128 juniors have created a GuruCool account so far. Full user management — search, roles, exports — is on the way.</p>
-          <button class="btn btn-sm is-disabled" disabled>Coming Soon</button>
+          <p class="mt-16">View every account that's signed up — and remove one if you need to.</p>
+          <a href="#" class="btn btn-secondary btn-sm" onclick="document.getElementById('registeredUsersSection').scrollIntoView({behavior:'smooth'}); return false;">Manage Users</a>
         </div>
 
         <div class="card hoverable">

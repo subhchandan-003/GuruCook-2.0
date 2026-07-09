@@ -149,6 +149,17 @@ p{ margin: 0 0 14px; font-size: 17px; }
   transform: translateY(-2px);
 }
 
+.btn-danger{
+  background: #C4593E;
+  color: var(--white);
+  box-shadow: 0 6px 0 #A6432B, 0 10px 18px var(--shadow);
+}
+.btn-danger:hover{
+  background: #D2694D;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #A6432B, 0 14px 22px var(--shadow);
+}
+
 .btn-sm{ padding: 9px 18px; font-size: 14.5px; min-height: 38px; }
 .btn-block{ width:100%; }
 
@@ -484,6 +495,18 @@ body.pre-auth .header-inner{ justify-content:center; }
 .login-activity-row:last-child{ border-bottom:none; padding-bottom:0; }
 .login-activity-row .la-email{ font-weight:700; color: var(--navy); }
 .login-activity-row .la-time{ color: var(--navy-soft); white-space:nowrap; font-size:13.5px; }
+
+.user-roster-list{ display:flex; flex-direction:column; }
+.user-roster-row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  padding: 14px 0; border-bottom: 2px solid var(--border-soft);
+}
+.user-roster-row:last-child{ border-bottom:none; padding-bottom:0; }
+.ur-info{ display:flex; flex-direction:column; gap:4px; }
+.ur-info .ur-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.ur-email{ font-weight:700; color: var(--navy); font-size:15px; }
+.ur-meta{ color: var(--navy-soft); font-size:13px; }
+.ur-id{ color: var(--navy-soft); font-size:12px; font-family: monospace; }
 
 .admin-card-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .admin-progress{
