@@ -227,6 +227,144 @@
     });
   }
 
+  /* ---------------- Industry Handbook: live status + LinkedIn link ---------------- */
+  var INDUSTRY_STATUS_META = {
+    coming_soon: { badgeClass: "badge-soon", label: "Coming Soon" },
+    critical: { badgeClass: "badge-upload", label: "Critical" },
+    important: { badgeClass: "badge-curated", label: "Important" },
+    live: { badgeClass: "badge-available", label: "Available" }
+  };
+
+  function renderIndustryCard(row, isAdmin) {
+    var meta = INDUSTRY_STATUS_META[row.status] || INDUSTRY_STATUS_META.coming_soon;
+    var isLive = row.status === "live" && !!row.linkedin_url;
+    var cardClass = "card hoverable" + (isLive ? " card-tilt-green" : "");
+    var iconWrapClass = isLive ? "wrap-icon green" : "wrap-icon";
+    var filterText = escapeHtml(row.name.toLowerCase());
+
+    var head = isAdmin
+      ? '<select class="industry-status-select" data-industry-id="' +
+        row.id +
+        '">' +
+        Object.keys(INDUSTRY_STATUS_META)
+          .map(function (key) {
+            var selected = key === row.status ? " selected" : "";
+            return '<option value="' + key + '"' + selected + ">" + INDUSTRY_STATUS_META[key].label + "</option>";
+          })
+          .join("") +
+        "</select>"
+      : '<span class="badge ' + meta.badgeClass + '">' + meta.label + "</span>";
+
+    var body;
+    if (isAdmin) {
+      var previewLink = row.linkedin_url
+        ? '<a href="' + escapeHtml(row.linkedin_url) + '" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Preview</a>'
+        : "";
+      var liveHint =
+        row.status === "live" && !row.linkedin_url
+          ? '<p class="industry-live-hint">Add a LinkedIn URL so students can actually view this.</p>'
+          : "";
+      body =
+        '<div class="form-group mt-16 mb-0">' +
+        '<label style="font-size:13px;">LinkedIn post URL</label>' +
+        '<input type="url" class="industry-url-input" data-industry-id="' +
+        row.id +
+        '" placeholder="https://www.linkedin.com/posts/..." value="' +
+        escapeHtml(row.linkedin_url || "") +
+        '">' +
+        "</div>" +
+        liveHint +
+        '<div class="industry-save-row mt-16">' +
+        '<button class="btn btn-primary btn-sm" data-save-industry="' +
+        row.id +
+        '">Save</button>' +
+        previewLink +
+        '<span class="industry-save-status" data-status-for="' +
+        row.id +
+        '"></span>' +
+        "</div>";
+    } else if (isLive) {
+      body = '<a href="' + escapeHtml(row.linkedin_url) + '" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View</a>';
+    } else {
+      body = '<button class="btn btn-sm is-disabled" disabled>Coming Soon</button>';
+    }
+
+    return (
+      '<div class="' +
+      cardClass +
+      '" data-filter-item="handbook" data-filter-text="' +
+      filterText +
+      '">' +
+      '<div class="flex-between mb-0"><span class="' +
+      iconWrapClass +
+      '"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span>' +
+      head +
+      "</div>" +
+      '<h3 class="mt-16">' +
+      escapeHtml(row.name) +
+      "</h3>" +
+      "<p>" +
+      escapeHtml(row.description) +
+      "</p>" +
+      body +
+      "</div>"
+    );
+  }
+
+  function loadIndustries() {
+    var gridEl = document.getElementById("handbookGrid");
+    if (!gridEl) return;
+
+    supabaseClient
+      .from("industries")
+      .select("id, slug, name, description, status, linkedin_url")
+      .order("sort_order")
+      .then(function (res) {
+        if (res.error || !res.data) {
+          gridEl.innerHTML = '<p class="text-muted mb-0">Couldn\'t load industries right now.</p>';
+          return;
+        }
+        var isAdmin = currentRole === "admin";
+        gridEl.innerHTML = res.data.map(function (row) { return renderIndustryCard(row, isAdmin); }).join("");
+      });
+  }
+
+  function saveIndustry(id) {
+    var select = document.querySelector('select[data-industry-id="' + id + '"]');
+    var input = document.querySelector('input[data-industry-id="' + id + '"]');
+    var statusEl = document.querySelector('[data-status-for="' + id + '"]');
+    if (!select || !input) return;
+
+    if (statusEl) {
+      statusEl.textContent = "Saving…";
+      statusEl.classList.remove("error");
+    }
+
+    supabaseClient
+      .from("industries")
+      .update({ status: select.value, linkedin_url: input.value.trim() || null })
+      .eq("id", id)
+      .then(function (res) {
+        if (res.error) {
+          if (statusEl) {
+            statusEl.textContent = "Couldn't save: " + res.error.message;
+            statusEl.classList.add("error");
+          }
+          return;
+        }
+        loadIndustries();
+      });
+  }
+
+  var handbookGrid = document.getElementById("handbookGrid");
+  if (handbookGrid) {
+    handbookGrid.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-save-industry]");
+      if (!btn) return;
+      saveIndustry(btn.getAttribute("data-save-industry"));
+    });
+  }
+
   function render() {
     var parsed = parseHash();
     var route = ROUTES.indexOf(parsed.route) !== -1 ? parsed.route : "login";
@@ -256,6 +394,8 @@
       if (term) activateTab("term", "term-" + term);
       syncResourceBreadcrumb();
     }
+
+    if (route === "handbook") loadIndustries();
 
     if (route === "admin") {
       loadAdminStats();
@@ -419,10 +559,13 @@
   ------------------------------------------------------- */
   document.querySelectorAll("[data-filter-input]").forEach(function (input) {
     var scope = input.getAttribute("data-filter-input");
-    var items = document.querySelectorAll('[data-filter-item="' + scope + '"]');
     var emptyState = document.querySelector('[data-filter-empty="' + scope + '"]');
 
     function runFilter() {
+      // Re-query on every keystroke rather than caching at bind time: some
+      // scopes (e.g. "handbook") render their items asynchronously after
+      // this listener is attached, so a cached NodeList would stay empty.
+      var items = document.querySelectorAll('[data-filter-item="' + scope + '"]');
       var q = input.value.trim().toLowerCase();
       var visibleCount = 0;
       items.forEach(function (item) {
