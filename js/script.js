@@ -365,6 +365,142 @@
     });
   }
 
+  /* ---------------- Founders/Team: profile photo upload, change, remove ---------------- */
+  var PROFILE_PHOTOS_BUCKET = "profile-photos";
+  var MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+
+  function avatarPublicUrl(path) {
+    if (!path) return null;
+    var res = supabaseClient.storage.from(PROFILE_PHOTOS_BUCKET).getPublicUrl(path);
+    return res.data && res.data.publicUrl;
+  }
+
+  function renderPersonAvatar(slug, avatarPath) {
+    var el = document.getElementById("avatar-" + slug);
+    if (!el) return;
+    if (el.dataset.initials === undefined) el.dataset.initials = el.textContent.trim();
+    var url = avatarPublicUrl(avatarPath);
+    if (url) {
+      el.innerHTML = '<img src="' + escapeHtml(url) + "?v=" + Date.now() + '" alt="" class="profile-avatar-img">';
+    } else {
+      el.textContent = el.dataset.initials;
+    }
+  }
+
+  function renderPersonAdminControls(slug, avatarPath) {
+    var el = document.querySelector('.profile-photo-admin[data-person-slug="' + slug + '"]');
+    if (!el) return;
+    if (currentRole !== "admin") {
+      el.innerHTML = "";
+      return;
+    }
+    var removeBtn = avatarPath
+      ? '<button type="button" class="btn btn-sm btn-danger" data-remove-photo="' + slug + '">Remove Photo</button>'
+      : "";
+    el.innerHTML =
+      '<label class="btn btn-sm btn-secondary" style="cursor:pointer;">' +
+      (avatarPath ? "Change Photo" : "Upload Photo") +
+      '<input type="file" accept="image/*" data-upload-photo="' +
+      slug +
+      '" style="display:none;">' +
+      "</label>" +
+      removeBtn +
+      '<span class="photo-upload-status" data-photo-status-for="' + slug + '"></span>';
+  }
+
+  function loadPeoplePhotos() {
+    supabaseClient
+      .from("people")
+      .select("slug, avatar_path")
+      .then(function (res) {
+        if (res.error || !res.data) return;
+        res.data.forEach(function (row) {
+          renderPersonAvatar(row.slug, row.avatar_path);
+          renderPersonAdminControls(row.slug, row.avatar_path);
+        });
+      });
+  }
+
+  function setPhotoStatus(slug, message, isError) {
+    var el = document.querySelector('[data-photo-status-for="' + slug + '"]');
+    if (!el) return;
+    el.textContent = message;
+    el.classList.toggle("error", !!isError);
+  }
+
+  function uploadPersonPhoto(slug, file) {
+    if (file.size > MAX_PHOTO_BYTES) {
+      setPhotoStatus(slug, "Photo must be under 5MB.", true);
+      return;
+    }
+    setPhotoStatus(slug, "Uploading…", false);
+
+    var ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+    var path = slug + "/" + Date.now() + "." + ext;
+    var oldPath = null;
+
+    supabaseClient
+      .from("people")
+      .select("avatar_path")
+      .eq("slug", slug)
+      .single()
+      .then(function (existingRes) {
+        oldPath = existingRes.data && existingRes.data.avatar_path;
+        return supabaseClient.storage.from(PROFILE_PHOTOS_BUCKET).upload(path, file, { cacheControl: "3600", upsert: false });
+      })
+      .then(function (uploadRes) {
+        if (uploadRes.error) throw uploadRes.error;
+        return supabaseClient.from("people").update({ avatar_path: path }).eq("slug", slug);
+      })
+      .then(function (updateRes) {
+        if (updateRes.error) throw updateRes.error;
+        if (oldPath) supabaseClient.storage.from(PROFILE_PHOTOS_BUCKET).remove([oldPath]);
+        loadPeoplePhotos();
+      })
+      .catch(function (err) {
+        setPhotoStatus(slug, "Couldn't upload: " + (err && err.message ? err.message : err), true);
+      });
+  }
+
+  function removePersonPhoto(slug) {
+    if (!window.confirm("Remove this photo? The card will go back to showing initials.")) return;
+
+    supabaseClient
+      .from("people")
+      .select("avatar_path")
+      .eq("slug", slug)
+      .single()
+      .then(function (res) {
+        var oldPath = res.data && res.data.avatar_path;
+        return supabaseClient
+          .from("people")
+          .update({ avatar_path: null })
+          .eq("slug", slug)
+          .then(function (updateRes) {
+            if (updateRes.error) throw updateRes.error;
+            if (oldPath) supabaseClient.storage.from(PROFILE_PHOTOS_BUCKET).remove([oldPath]);
+          });
+      })
+      .then(function () {
+        loadPeoplePhotos();
+      })
+      .catch(function (err) {
+        window.alert("Couldn't remove photo: " + (err && err.message ? err.message : err));
+      });
+  }
+
+  document.addEventListener("change", function (e) {
+    var input = e.target.closest("[data-upload-photo]");
+    if (!input || !input.files || !input.files[0]) return;
+    uploadPersonPhoto(input.getAttribute("data-upload-photo"), input.files[0]);
+  });
+
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-remove-photo]");
+    if (!btn) return;
+    removePersonPhoto(btn.getAttribute("data-remove-photo"));
+  });
+
   function render() {
     var parsed = parseHash();
     var route = ROUTES.indexOf(parsed.route) !== -1 ? parsed.route : "login";
@@ -396,6 +532,8 @@
     }
 
     if (route === "handbook") loadIndustries();
+
+    if (route === "founders" || route === "team") loadPeoplePhotos();
 
     if (route === "admin") {
       loadAdminStats();
