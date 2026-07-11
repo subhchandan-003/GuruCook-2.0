@@ -478,6 +478,18 @@ body.pre-auth .header-inner{ justify-content:center; }
 .wrap-icon.green{ background: var(--green-light); border-color: var(--green-deep); color:#3B6B32; }
 .wrap-icon.rose{ background: var(--rose-light); border-color: var(--rose); color:#A24B2E; }
 
+.contact-note-box{
+  display:inline-block; margin: 4px auto 0;
+  padding: 10px 26px; border: 2px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--paper);
+  color: var(--navy); font-weight:700; font-size:16px;
+}
+.contact-link{
+  color: var(--navy); font-size:14.5px; text-decoration: none;
+  border-bottom: 1px solid var(--border); padding-bottom:1px;
+}
+.contact-link:hover{ color: var(--accent-dark); border-color: var(--accent-dark); }
+
 .divider-dots{
   display:flex; justify-content:center; gap:8px; margin: 36px 0;
   opacity:.6;
