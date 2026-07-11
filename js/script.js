@@ -21,6 +21,7 @@
 
   var currentUser = null;
   var currentRole = null;
+  var currentBatch = null;
 
   /* ---------------- Mobile hamburger nav ---------------- */
   var hamburger = document.getElementById("hamburgerBtn");
@@ -49,9 +50,10 @@
 
   async function cacheSessionFromUser(user) {
     currentUser = user;
-    var res = await supabaseClient.from("profiles").select("full_name, email, role").eq("id", user.id).single();
+    var res = await supabaseClient.from("profiles").select("full_name, email, role, batch").eq("id", user.id).single();
     var profile = res.data;
     currentRole = (profile && profile.role) || "student";
+    currentBatch = (profile && profile.batch) || null;
     var displayName = (profile && profile.full_name) || (user.email ? user.email.split("@")[0] : "Junior");
     localStorage.setItem("gc_name", displayName);
     localStorage.setItem("gc_email", user.email || "");
@@ -60,8 +62,18 @@
   function clearSessionCache() {
     currentUser = null;
     currentRole = null;
+    currentBatch = null;
     localStorage.removeItem("gc_name");
     localStorage.removeItem("gc_email");
+  }
+
+  function applyContributeVisibility() {
+    var hide = currentBatch === "PGP-1";
+    document.querySelectorAll('[data-nav="contribute"]').forEach(function (el) {
+      el.style.display = hide ? "none" : "";
+    });
+    var dashCard = document.getElementById("contributeDashCard");
+    if (dashCard) dashCard.style.display = hide ? "none" : "";
   }
 
   function recordLogin() {
@@ -548,6 +560,13 @@
       return;
     }
 
+    if (route === "contribute" && currentBatch === "PGP-1") {
+      navigate("dashboard");
+      return;
+    }
+
+    applyContributeVisibility();
+
     document.querySelectorAll(".page").forEach(function (p) {
       p.classList.toggle("active", p.getAttribute("data-page") === route);
     });
@@ -653,6 +672,13 @@
       signupSubmitBtn.textContent = "Creating your account…";
 
       try {
+        var allowedCheck = await supabaseClient.rpc("is_email_allowed", { p_email: emailVal });
+        if (allowedCheck.error || !allowedCheck.data) {
+          signupGeneralError.textContent = "This email isn't on the registered student list yet. Please contact the admin if you think this is a mistake.";
+          signupGeneralError.classList.add("show");
+          return;
+        }
+
         var signUpResult = await supabaseClient.auth.signUp({
           email: emailVal,
           password: pw.value,
