@@ -548,6 +548,12 @@
       return;
     }
 
+    // Contribute feature hidden for launch; re-add when ready to go live.
+    if (route === "contribute") {
+      navigate("dashboard");
+      return;
+    }
+
     document.querySelectorAll(".page").forEach(function (p) {
       p.classList.toggle("active", p.getAttribute("data-page") === route);
     });
