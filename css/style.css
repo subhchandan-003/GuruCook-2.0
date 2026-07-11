@@ -88,18 +88,8 @@ p{ margin: 0 0 14px; font-size: 17px; }
   .lede{ font-size: 16.5px; }
 }
 
-/* ---------- Doodle sprite ---------- */
+/* ---------- Icon sprite (symbol defs only — decorative doodles removed) ---------- */
 .doodle-defs{ position:absolute; width:0; height:0; overflow:hidden; }
-
-.doodle{
-  color: var(--accent-dark);
-  opacity: .55;
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-}
-.doodle.dim-green{ color: var(--green-deep); }
-.doodle.dim-navy{ color: var(--navy-soft); }
 
 /* ---------- Buttons ---------- */
 .btn{
