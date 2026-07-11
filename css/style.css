@@ -241,6 +241,14 @@ p{ margin: 0 0 14px; font-size: 17px; }
   border:2px solid var(--green-deep); padding: 6px 16px; border-radius:999px;
   font-size: 13.5px; font-weight:700; margin-bottom: 16px;
 }
+.login-badge-wide{ display:block; width:100%; box-sizing:border-box; }
+/* Fluid size tuned to the measured text width so "Welcome to GuruCool 2.0"
+   always fits the auth card's width on one line, from the smallest phones
+   up to the card's 480px cap, without ever overflowing horizontally. */
+.login-title-oneline{
+  font-size: clamp(20px, calc((100vw - 88px) * 0.0832), 34px);
+  white-space: nowrap;
+}
 
 /* ---------- Card ---------- */
 .card{
