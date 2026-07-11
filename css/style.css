@@ -183,18 +183,8 @@ p{ margin: 0 0 14px; font-size: 17px; }
   display:flex; align-items:center; justify-content:space-between;
   padding: 14px 24px;
 }
-.brand{ display:flex; align-items:center; gap:10px; }
-.brand-badge{
-  width:42px; height:42px; border-radius: 50%;
-  background: var(--yellow-light); border:2px solid var(--yellow);
-  display:flex; align-items:center; justify-content:center;
-  color: var(--accent-dark);
-  flex-shrink:0;
-  overflow:hidden;
-}
-.brand-badge img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
-.brand-text{ font-size: 22px; font-weight:700; color: var(--navy); }
-.brand-text small{ display:block; font-size: 12px; font-weight:400; color: var(--navy-soft); letter-spacing:.04em; }
+.brand{ display:flex; align-items:center; }
+.brand-logo{ height:64px; width:auto; display:block; }
 
 .main-nav{ display:flex; align-items:center; gap: 6px; }
 .nav-link{
@@ -221,7 +211,7 @@ p{ margin: 0 0 14px; font-size: 17px; }
 
 @media (max-width: 900px){
   .main-nav{
-    position: fixed; inset: 68px 0 0 0;
+    position: fixed; inset: 94px 0 0 0;
     background: var(--cream);
     flex-direction: column; align-items: stretch;
     gap: 4px; padding: 18px;
