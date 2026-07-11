@@ -755,20 +755,6 @@
     });
   }
 
-  /* ---------------- Dashboard search -> route on Enter ---------------- */
-  var dashSearch = document.getElementById("dashSearchInput");
-  if (dashSearch) {
-    dashSearch.addEventListener("keydown", function (e) {
-      if (e.key !== "Enter") return;
-      var q = dashSearch.value.trim().toLowerCase();
-      if (!q) return;
-      if (/industry|handbook|bank|auto|pharma|fmcg|it |telecom|airline|ecommerce|e-commerce/.test(q)) {
-        navigate("handbook");
-      } else if (/term|note|assignment|ppt|subject|course/.test(q)) {
-        navigate("resources");
-      }
-    });
-  }
 
   /* ---------------- Contribute form ---------------- */
   var contributeForm = document.getElementById("contributeForm");
