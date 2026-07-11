@@ -4,15 +4,15 @@
 
   var ROUTES = ["login", "welcome", "dashboard", "resources", "handbook", "founders", "team", "contribute", "admin"];
   var PAGE_TITLES = {
-    login: "GuruCool 2.0 — Sign Up or Login",
-    welcome: "Welcome — GuruCool 2.0",
-    dashboard: "Dashboard — GuruCool 2.0",
-    resources: "Term-wise Academic Resources — GuruCool 2.0",
-    handbook: "Industry Handbook Series — GuruCool 2.0",
-    founders: "Meet the Founders — GuruCool 2.0",
-    team: "Meet the Team & Contact Us — GuruCool 2.0",
-    contribute: "Contribute to GuruCool — GuruCool 2.0",
-    admin: "Admin Dashboard — GuruCool 2.0"
+    login: "GuruCool 2.0 | Sign Up or Login",
+    welcome: "Welcome | GuruCool 2.0",
+    dashboard: "Dashboard | GuruCool 2.0",
+    resources: "Term-wise Academic Resources | GuruCool 2.0",
+    handbook: "Industry Handbook Series | GuruCool 2.0",
+    founders: "Meet the Founders | GuruCool 2.0",
+    team: "Meet the Team & Contact Us | GuruCool 2.0",
+    contribute: "Contribute to GuruCool | GuruCool 2.0",
+    admin: "Admin Dashboard | GuruCool 2.0"
   };
 
   var SUPABASE_URL = "https://kbrutxednbudjbxvtgng.supabase.co";
@@ -130,11 +130,26 @@
   function loadAdminStats() {
     var statEl = document.getElementById("statRegisteredUsers");
     var listEl = document.getElementById("loginActivityList");
-    if (!statEl && !listEl) return;
+    var contribStatEl = document.getElementById("statContribCount");
+    var contribQueueText = document.getElementById("contribQueueText");
+    if (!statEl && !listEl && !contribStatEl) return;
 
     if (statEl) {
       supabaseClient.from("profiles").select("*", { count: "exact", head: true }).then(function (res) {
-        statEl.textContent = res.count != null ? res.count : "—";
+        statEl.textContent = res.count != null ? res.count : "N/A";
+      });
+    }
+
+    if (contribStatEl || contribQueueText) {
+      supabaseClient.from("contributions").select("*", { count: "exact", head: true }).then(function (res) {
+        var count = res.count != null ? res.count : 0;
+        if (contribStatEl) contribStatEl.textContent = res.count != null ? res.count : "N/A";
+        if (contribQueueText) {
+          contribQueueText.textContent =
+            count === 0
+              ? "Student contributions are open. Nothing submitted yet."
+              : "Student contributions are open. " + count + (count === 1 ? " resource" : " resources") + " submitted so far.";
+        }
       });
     }
 
@@ -646,7 +661,7 @@
 
         if (signUpResult.error) {
           var msg = /already registered|already exists/i.test(signUpResult.error.message || "")
-            ? "This email is already registered — try logging in instead."
+            ? "This email is already registered. Try logging in instead."
             : "We couldn't create your account. Please double-check your IIM Sambalpur email ID and try again.";
           signupGeneralError.textContent = msg;
           signupGeneralError.classList.add("show");
@@ -654,7 +669,7 @@
         }
 
         if (!signUpResult.data.session) {
-          signupGeneralError.textContent = "Account created — please confirm your email before logging in.";
+          signupGeneralError.textContent = "Account created. Please confirm your email before logging in.";
           signupGeneralError.classList.add("show");
           return;
         }
