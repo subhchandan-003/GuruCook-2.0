@@ -489,6 +489,8 @@ body.pre-auth .header-inner{ justify-content:center; }
   border-bottom: 1px solid var(--border); padding-bottom:1px;
 }
 .contact-link:hover{ color: var(--accent-dark); border-color: var(--accent-dark); }
+.contact-plain{ color: var(--navy-soft); font-size:14.5px; }
+.contact-plain .contact-name{ color: var(--navy); font-weight:700; }
 
 .divider-dots{
   display:flex; justify-content:center; gap:8px; margin: 36px 0;
