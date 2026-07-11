@@ -729,11 +729,64 @@
     });
   }
 
-  /* ---------------- Contribute form (mockup, disabled submit) ---------------- */
+  /* ---------------- Contribute form ---------------- */
   var contributeForm = document.getElementById("contributeForm");
   if (contributeForm) {
-    contributeForm.addEventListener("submit", function (e) {
+    var contribSubmitBtn = document.getElementById("contribSubmitBtn");
+    var contribGeneralError = document.getElementById("contribGeneralError");
+    var contribSuccessMsg = document.getElementById("contribSuccessMsg");
+
+    contributeForm.addEventListener("submit", async function (e) {
       e.preventDefault();
+      contribGeneralError.textContent = "";
+      contribSuccessMsg.textContent = "";
+
+      var name = document.getElementById("contribName").value.trim();
+      var section = document.getElementById("contribSection").value.trim();
+      var term = document.getElementById("contribTerm").value;
+      var subject = document.getElementById("contribSubject").value;
+      var resTypeInput = contributeForm.querySelector('input[name="resType"]:checked');
+      var resType = resTypeInput ? resTypeInput.value : "";
+      var urlLink = document.getElementById("contribUrl").value.trim();
+      var description = document.getElementById("contribDesc").value.trim();
+
+      if (!name || !section || !term || !subject || !resType || !urlLink) {
+        contribGeneralError.textContent = "Please fill in all required fields, including the resource type and Google Drive link.";
+        return;
+      }
+      if (!/^https?:\/\/(drive|docs)\.google\.com\//i.test(urlLink)) {
+        contribGeneralError.textContent = "Please paste a valid Google Drive link (starting with https://drive.google.com/…).";
+        return;
+      }
+      if (!currentUser) {
+        contribGeneralError.textContent = "Please log in again before submitting.";
+        return;
+      }
+
+      contribSubmitBtn.disabled = true;
+      contribSubmitBtn.textContent = "Submitting…";
+
+      var res = await supabaseClient.from("contributions").insert({
+        user_id: currentUser.id,
+        name: name,
+        section: section,
+        term: term,
+        subject: subject,
+        resource_type: resType,
+        url_link: urlLink,
+        description: description || null
+      });
+
+      contribSubmitBtn.disabled = false;
+      contribSubmitBtn.textContent = "Submit Contribution";
+
+      if (res.error) {
+        contribGeneralError.textContent = "Couldn't submit: " + res.error.message;
+        return;
+      }
+
+      contributeForm.reset();
+      contribSuccessMsg.textContent = "Thank you! Your contribution has been submitted for review.";
     });
   }
 

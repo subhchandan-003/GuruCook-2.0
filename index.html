@@ -784,21 +784,31 @@
 
 
     <section class="hero container" style="padding-top:12px;">
-      <span class="hero-badge">Coming Soon</span>
+      <span class="hero-badge">Built by Seniors, For Juniors</span>
       <h1>Contribute to GuruCool</h1>
-      <p class="lede" style="max-width:720px;">GuruCool becomes stronger when students contribute. Soon, you will be able to upload your own notes, assignment references, PPTs, project learnings, and exam preparation tips to help your batchmates and future juniors.</p>
+      <p class="lede" style="max-width:720px;">GuruCool becomes stronger when students contribute. Share your notes, assignment references, PPTs, project learnings, or exam preparation tips to help your batchmates and future juniors.</p>
     </section>
 
     <section class="section container" style="padding-top:0;">
       <div class="card" style="max-width:640px; margin:0 auto;">
         <div class="sticky-note mt-8" style="margin-bottom:26px;">
-          <p class="mb-0">This feature is coming soon. Feel free to explore the form below — nothing will be uploaded just yet.</p>
+          <p class="mb-0"><strong>Please share a Google Drive link only.</strong> Make sure link sharing is turned on ("Anyone with the link can view") before you submit, so juniors can actually open it.</p>
         </div>
 
         <form id="contributeForm" novalidate>
           <div class="form-group">
+            <label for="contribName">Name</label>
+            <input type="text" id="contribName" placeholder="e.g. Ananya Rao" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contribSection">Section</label>
+            <input type="text" id="contribSection" placeholder="e.g. Section A" required>
+          </div>
+
+          <div class="form-group">
             <label for="contribTerm">Select Term</label>
-            <select id="contribTerm">
+            <select id="contribTerm" required>
               <option value="">Choose a term…</option>
               <option>Term-I</option>
               <option>Term-II</option>
@@ -808,7 +818,7 @@
 
           <div class="form-group">
             <label for="contribSubject">Select Subject</label>
-            <select id="contribSubject">
+            <select id="contribSubject" required>
               <option value="">Choose a subject…</option>
               <option>Microeconomics</option>
               <option>Business Communication</option>
@@ -821,20 +831,19 @@
           <div class="form-group">
             <label>Resource Type</label>
             <div class="pill-row">
-              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Notes</label>
-              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Assignment</label>
-              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> PPT</label>
-              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Project Reference</label>
-              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Exam Tips</label>
-              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" style="margin-right:6px;"> Other</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" value="Notes" style="margin-right:6px;" required> Notes</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" value="Assignment" style="margin-right:6px;"> Assignment</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" value="PPT" style="margin-right:6px;"> PPT</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" value="Project Reference" style="margin-right:6px;"> Project Reference</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" value="Exam Tips" style="margin-right:6px;"> Exam Tips</label>
+              <label class="value-chip" style="cursor:pointer;"><input type="radio" name="resType" value="Other" style="margin-right:6px;"> Other</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="contribFile">Upload File</label>
-            <button type="button" class="btn btn-soft btn-block is-disabled" disabled title="Uploading is coming soon">
-              <svg width="16" height="16"><use href="#ic-upload"/></svg> Choose a file (coming soon)
-            </button>
+            <label for="contribUrl">Google Drive Link</label>
+            <input type="url" id="contribUrl" placeholder="https://drive.google.com/…" required>
+            <div class="help-text">Paste the shareable Google Drive link of the resource you want to contribute.</div>
           </div>
 
           <div class="form-group">
@@ -842,8 +851,9 @@
             <textarea id="contribDesc" rows="4" placeholder="Tell us a little about this resource…"></textarea>
           </div>
 
-          <button type="submit" class="btn btn-block is-disabled" disabled>Upload Coming Soon</button>
-          <p class="text-center text-muted mt-16 mb-0" style="font-size:14px;">Resources are being uploaded with care — good things take a little curation.</p>
+          <div class="error-text" id="contribGeneralError"></div>
+          <button type="submit" class="btn btn-primary btn-block" id="contribSubmitBtn">Submit Contribution</button>
+          <p class="text-center text-muted mt-16 mb-0" style="font-size:14px;" id="contribSuccessMsg"></p>
         </form>
       </div>
     </section>
