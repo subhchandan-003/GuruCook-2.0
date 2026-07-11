@@ -477,6 +477,10 @@ body.pre-auth .header-inner{ justify-content:center; }
 }
 .wrap-icon.green{ background: var(--green-light); border-color: var(--green-deep); color:#3B6B32; }
 .wrap-icon.rose{ background: var(--rose-light); border-color: var(--rose); color:#A24B2E; }
+.wrap-icon-numeral{
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700; font-size: 17px; letter-spacing: 0.5px;
+}
 
 .contact-note-box{
   display:inline-block; margin: 4px auto 0;

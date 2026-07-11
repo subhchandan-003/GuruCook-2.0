@@ -235,11 +235,35 @@
     live: { badgeClass: "badge-available", label: "Available" }
   };
 
+  var INDUSTRY_ICONS = {
+    automotive: "ic-car",
+    airline: "ic-plane",
+    banking: "ic-bank",
+    cement: "ic-factory",
+    defence: "ic-shield",
+    ecommerce: "ic-cart",
+    edtech: "ic-graduation",
+    ev: "ic-plug",
+    fmcg: "ic-basket",
+    "food-delivery": "ic-scooter",
+    healthcare: "ic-pulse",
+    hospitality: "ic-bed",
+    it: "ic-monitor",
+    logistics: "ic-truck",
+    "media-entertainment": "ic-clapper",
+    nbfc: "ic-wallet",
+    "oil-gas": "ic-fuel",
+    pharma: "ic-pill",
+    power: "ic-bolt",
+    telecom: "ic-tower"
+  };
+
   function renderIndustryCard(row, isAdmin) {
     var meta = INDUSTRY_STATUS_META[row.status] || INDUSTRY_STATUS_META.coming_soon;
     var isLive = row.status === "live" && !!row.linkedin_url;
     var cardClass = "card hoverable" + (isLive ? " card-tilt-green" : "");
     var iconWrapClass = isLive ? "wrap-icon green" : "wrap-icon";
+    var iconId = INDUSTRY_ICONS[row.slug] || "ic-briefcase";
 
     var head = isAdmin
       ? '<select class="industry-status-select" data-industry-id="' +
@@ -294,7 +318,9 @@
       '">' +
       '<div class="flex-between mb-0"><span class="' +
       iconWrapClass +
-      '"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span>' +
+      '"><svg width="20" height="20"><use href="#' +
+      iconId +
+      '"/></svg></span>' +
       head +
       "</div>" +
       '<h3 class="mt-16">' +
