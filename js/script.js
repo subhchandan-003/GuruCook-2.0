@@ -240,7 +240,6 @@
     var isLive = row.status === "live" && !!row.linkedin_url;
     var cardClass = "card hoverable" + (isLive ? " card-tilt-green" : "");
     var iconWrapClass = isLive ? "wrap-icon green" : "wrap-icon";
-    var filterText = escapeHtml(row.name.toLowerCase());
 
     var head = isAdmin
       ? '<select class="industry-status-select" data-industry-id="' +
@@ -292,8 +291,6 @@
     return (
       '<div class="' +
       cardClass +
-      '" data-filter-item="handbook" data-filter-text="' +
-      filterText +
       '">' +
       '<div class="flex-between mb-0"><span class="' +
       iconWrapClass +
@@ -690,32 +687,6 @@
       }
     });
   }
-
-  /* ---------------- Generic search/filter ----------------
-     Markup contract: input[data-filter-input="scope"], items[data-filter-item="scope"]
-     Filters by textContent match; shows/hides items, and toggles an "empty state" node.
-  ------------------------------------------------------- */
-  document.querySelectorAll("[data-filter-input]").forEach(function (input) {
-    var scope = input.getAttribute("data-filter-input");
-    var emptyState = document.querySelector('[data-filter-empty="' + scope + '"]');
-
-    function runFilter() {
-      // Re-query on every keystroke rather than caching at bind time: some
-      // scopes (e.g. "handbook") render their items asynchronously after
-      // this listener is attached, so a cached NodeList would stay empty.
-      var items = document.querySelectorAll('[data-filter-item="' + scope + '"]');
-      var q = input.value.trim().toLowerCase();
-      var visibleCount = 0;
-      items.forEach(function (item) {
-        var text = (item.getAttribute("data-filter-text") || item.textContent).toLowerCase();
-        var match = q === "" || text.indexOf(q) !== -1;
-        item.classList.toggle("hidden", !match);
-        if (match) visibleCount++;
-      });
-      if (emptyState) emptyState.classList.toggle("hidden", visibleCount !== 0);
-    }
-    input.addEventListener("input", runFilter);
-  });
 
   /* ---------------- Dashboard search -> route on Enter ---------------- */
   var dashSearch = document.getElementById("dashSearchInput");
