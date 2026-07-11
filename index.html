@@ -798,7 +798,13 @@
 
           <div class="form-group">
             <label for="contribSection">Section</label>
-            <input type="text" id="contribSection" placeholder="e.g. Section A" required>
+            <select id="contribSection" required>
+              <option value="">Choose a section…</option>
+              <option>Section A</option>
+              <option>Section B</option>
+              <option>Section C</option>
+              <option>Section D</option>
+            </select>
           </div>
 
           <div class="form-group">
@@ -813,13 +819,8 @@
 
           <div class="form-group">
             <label for="contribSubject">Select Subject</label>
-            <select id="contribSubject" required>
-              <option value="">Choose a subject…</option>
-              <option>Microeconomics</option>
-              <option>Business Communication</option>
-              <option>Financial Accounting</option>
-              <option>Operations Management</option>
-              <option>Other</option>
+            <select id="contribSubject" required disabled>
+              <option value="">Choose a term first…</option>
             </select>
           </div>
 

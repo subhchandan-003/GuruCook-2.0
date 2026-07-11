@@ -757,11 +757,62 @@
 
 
   /* ---------------- Contribute form ---------------- */
+  var TERM_SUBJECTS = {
+    "Term-I": [
+      "Microeconomics",
+      "Legal Aspects of Business",
+      "Business Communication",
+      "Financial Accounting",
+      "Quantitative Technique - I",
+      "Organizational Behaviour - I",
+      "Marketing Management - I",
+      "Managerial Computing",
+      "Statistical Package for the Social Sciences"
+    ],
+    "Term-II": [
+      "Operations Management-I",
+      "Macroeconomic Analysis",
+      "Marketing Management - II",
+      "Organizational Behaviour - II",
+      "Financial Management - I",
+      "Written Analysis and Communication",
+      "Quantitative Techniques - II",
+      "Management Accounting"
+    ],
+    "Term-III": [
+      "Operations Management - II",
+      "Financial Management - II",
+      "Human Resource Management",
+      "Strategic Management",
+      "Management Information Systems",
+      "Marketing Research",
+      "Business Ethics",
+      "Design Thinking",
+      "Corporate Social Responsibility"
+    ]
+  };
+
   var contributeForm = document.getElementById("contributeForm");
   if (contributeForm) {
     var contribSubmitBtn = document.getElementById("contribSubmitBtn");
     var contribGeneralError = document.getElementById("contribGeneralError");
     var contribSuccessMsg = document.getElementById("contribSuccessMsg");
+    var contribTermSelect = document.getElementById("contribTerm");
+    var contribSubjectSelect = document.getElementById("contribSubject");
+
+    contribTermSelect.addEventListener("change", function () {
+      var subjects = TERM_SUBJECTS[contribTermSelect.value];
+      if (!subjects) {
+        contribSubjectSelect.innerHTML = '<option value="">Choose a term first…</option>';
+        contribSubjectSelect.disabled = true;
+        return;
+      }
+      contribSubjectSelect.innerHTML =
+        '<option value="">Choose a subject…</option>' +
+        subjects.map(function (s) { return "<option>" + escapeHtml(s) + "</option>"; }).join("") +
+        "<option>Other</option>";
+      contribSubjectSelect.disabled = false;
+    });
 
     contributeForm.addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -813,6 +864,8 @@
       }
 
       contributeForm.reset();
+      contribSubjectSelect.innerHTML = '<option value="">Choose a term first…</option>';
+      contribSubjectSelect.disabled = true;
       contribSuccessMsg.textContent = "Thank you! Your contribution has been submitted for review.";
     });
   }
