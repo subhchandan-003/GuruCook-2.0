@@ -193,39 +193,78 @@
   }
 
   /* ---------------- Admin: registered users roster + remove ---------------- */
+  var registeredUsersData = [];
+  var currentUserBatchFilter = "all";
+
+  function renderUserRow(row) {
+    var joined = new Date(row.created_at).toLocaleDateString(undefined, { dateStyle: "medium" });
+    var isSelf = currentUser && row.id === currentUser.id;
+    var roleBadge = row.role === "admin" ? '<span class="badge badge-admin">Admin</span>' : '<span class="badge badge-available">Student</span>';
+    var batchBadge = row.batch ? ' <span class="badge badge-curated">' + escapeHtml(row.batch) + "</span>" : "";
+    var removeBtn = isSelf
+      ? '<button class="btn btn-sm is-disabled" disabled title="You can\'t remove your own account">Remove</button>'
+      : '<button class="btn btn-sm btn-danger" data-remove-user="' + escapeHtml(row.id) + '" data-remove-email="' + escapeHtml(row.email) + '">Remove</button>';
+    return (
+      '<div class="user-roster-row">' +
+      '<div class="ur-info">' +
+      '<div class="ur-top"><span class="ur-email">' + escapeHtml(row.full_name || row.email) + "</span>" + roleBadge + batchBadge + "</div>" +
+      '<span class="ur-meta">' + escapeHtml(row.email) + " · Joined " + escapeHtml(joined) + " · " + (row.login_count || 0) + " logins</span>" +
+      '<span class="ur-id">ID: ' + escapeHtml(row.id) + "</span>" +
+      "</div>" +
+      removeBtn +
+      "</div>"
+    );
+  }
+
+  function renderRegisteredUsersList() {
+    var listEl = document.getElementById("registeredUsersList");
+    if (!listEl) return;
+
+    var filtered = registeredUsersData.filter(function (row) {
+      if (currentUserBatchFilter === "all") return true;
+      if (currentUserBatchFilter === "admin") return row.role === "admin";
+      return row.role !== "admin" && row.batch === currentUserBatchFilter;
+    });
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<p class="text-muted mb-0">No registered users in this filter yet.</p>';
+      return;
+    }
+    listEl.innerHTML = filtered.map(renderUserRow).join("");
+  }
+
+  function updateUserBatchFilterCounts() {
+    var counts = { all: registeredUsersData.length, "PGP-1": 0, "PGP-2": 0, admin: 0 };
+    registeredUsersData.forEach(function (row) {
+      if (row.role === "admin") counts.admin++;
+      else if (row.batch === "PGP-1") counts["PGP-1"]++;
+      else if (row.batch === "PGP-2") counts["PGP-2"]++;
+    });
+    document.querySelectorAll("#userBatchFilter [data-batch-filter]").forEach(function (btn) {
+      var key = btn.getAttribute("data-batch-filter");
+      var label = key === "all" ? "All" : key === "admin" ? "Admins" : key;
+      btn.textContent = label + " (" + counts[key] + ")";
+    });
+  }
+
   function loadRegisteredUsers() {
     var listEl = document.getElementById("registeredUsersList");
     if (!listEl) return;
 
     supabaseClient
       .from("profiles")
-      .select("id, email, full_name, role, login_count, created_at")
+      .select("id, email, full_name, role, batch, login_count, created_at")
       .order("created_at", { ascending: false })
       .then(function (res) {
         if (res.error || !res.data || res.data.length === 0) {
+          registeredUsersData = [];
           listEl.innerHTML = '<p class="text-muted mb-0">No registered users yet.</p>';
+          updateUserBatchFilterCounts();
           return;
         }
-        listEl.innerHTML = res.data
-          .map(function (row) {
-            var joined = new Date(row.created_at).toLocaleDateString(undefined, { dateStyle: "medium" });
-            var isSelf = currentUser && row.id === currentUser.id;
-            var roleBadge = row.role === "admin" ? '<span class="badge badge-admin">Admin</span>' : '<span class="badge badge-available">Student</span>';
-            var removeBtn = isSelf
-              ? '<button class="btn btn-sm is-disabled" disabled title="You can\'t remove your own account">Remove</button>'
-              : '<button class="btn btn-sm btn-danger" data-remove-user="' + escapeHtml(row.id) + '" data-remove-email="' + escapeHtml(row.email) + '">Remove</button>';
-            return (
-              '<div class="user-roster-row">' +
-              '<div class="ur-info">' +
-              '<div class="ur-top"><span class="ur-email">' + escapeHtml(row.full_name || row.email) + "</span>" + roleBadge + "</div>" +
-              '<span class="ur-meta">' + escapeHtml(row.email) + " · Joined " + escapeHtml(joined) + " · " + (row.login_count || 0) + " logins</span>" +
-              '<span class="ur-id">ID: ' + escapeHtml(row.id) + "</span>" +
-              "</div>" +
-              removeBtn +
-              "</div>"
-            );
-          })
-          .join("");
+        registeredUsersData = res.data;
+        updateUserBatchFilterCounts();
+        renderRegisteredUsersList();
       });
   }
 
@@ -251,6 +290,19 @@
       var btn = e.target.closest("[data-remove-user]");
       if (!btn) return;
       removeUser(btn.getAttribute("data-remove-user"), btn.getAttribute("data-remove-email"));
+    });
+  }
+
+  var userBatchFilter = document.getElementById("userBatchFilter");
+  if (userBatchFilter) {
+    userBatchFilter.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-batch-filter]");
+      if (!btn) return;
+      currentUserBatchFilter = btn.getAttribute("data-batch-filter");
+      userBatchFilter.querySelectorAll("[data-batch-filter]").forEach(function (b) {
+        b.classList.toggle("active", b === btn);
+      });
+      renderRegisteredUsersList();
     });
   }
 
