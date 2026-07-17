@@ -876,7 +876,7 @@
           <div class="stat-label">Term subjects live</div>
         </div>
         <div class="stat-tile">
-          <div class="stat-num">4<span style="font-size:18px; color:var(--navy-soft);">/20</span></div>
+          <div class="stat-num"><span id="statIndustriesLive">…</span><span style="font-size:18px; color:var(--navy-soft);">/<span id="statIndustriesTotal">…</span></span></div>
           <div class="stat-label">Industry handbooks published</div>
         </div>
         <div class="stat-tile">
@@ -888,7 +888,7 @@
           <div class="stat-label">Registered juniors</div>
         </div>
       </div>
-      <p class="text-muted mt-8" style="font-size:13.5px;">Term and handbook counts above are illustrative for this prototype; the registered-junior count is live from Supabase.</p>
+      <p class="text-muted mt-8" style="font-size:13.5px;">Term subjects count above is illustrative for this prototype; handbook, contribution and registered-junior counts are live from Supabase.</p>
     </section>
 
     <section class="section container" style="padding-top:0;">
@@ -936,10 +936,10 @@
           <span class="wrap-icon"><svg width="20" height="20"><use href="#ic-briefcase"/></svg></span>
           <div class="admin-card-head mt-16">
             <h4 class="mb-0">Industry Handbook</h4>
-            <span class="badge badge-soon">4/20 live</span>
+            <span class="badge badge-soon" id="industryHandbookBadge">…</span>
           </div>
-          <div class="admin-progress"><div class="admin-progress-fill" style="width:20%;"></div></div>
-          <p>Banking, E-Commerce, FMCG and IT are published. The rest are being drafted by seniors sector by sector.</p>
+          <div class="admin-progress"><div class="admin-progress-fill" id="industryHandbookProgress" style="width:0%;"></div></div>
+          <p id="industryHandbookText">Loading live status…</p>
           <a href="#handbook" class="btn btn-secondary btn-sm">Review Live Page</a>
         </div>
 

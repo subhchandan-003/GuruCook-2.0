@@ -144,11 +144,38 @@
     var listEl = document.getElementById("loginActivityList");
     var contribStatEl = document.getElementById("statContribCount");
     var contribQueueText = document.getElementById("contribQueueText");
-    if (!statEl && !listEl && !contribStatEl) return;
+    var statIndustriesLive = document.getElementById("statIndustriesLive");
+    var statIndustriesTotal = document.getElementById("statIndustriesTotal");
+    var industryHandbookBadge = document.getElementById("industryHandbookBadge");
+    var industryHandbookProgress = document.getElementById("industryHandbookProgress");
+    var industryHandbookText = document.getElementById("industryHandbookText");
+    if (!statEl && !listEl && !contribStatEl && !statIndustriesLive) return;
 
     if (statEl) {
       supabaseClient.from("profiles").select("*", { count: "exact", head: true }).then(function (res) {
         statEl.textContent = res.count != null ? res.count : "N/A";
+      });
+    }
+
+    if (statIndustriesLive || industryHandbookBadge) {
+      supabaseClient.from("industries").select("status").then(function (res) {
+        if (res.error || !res.data) return;
+        var total = res.data.length;
+        var live = res.data.filter(function (row) { return row.status === "live"; }).length;
+        var pct = total ? Math.round((live / total) * 100) : 0;
+
+        if (statIndustriesLive) statIndustriesLive.textContent = live;
+        if (statIndustriesTotal) statIndustriesTotal.textContent = total;
+        if (industryHandbookBadge) {
+          industryHandbookBadge.textContent = live + "/" + total + " live";
+          industryHandbookBadge.className = "badge " + (live > 0 ? "badge-available" : "badge-soon");
+        }
+        if (industryHandbookProgress) industryHandbookProgress.style.width = pct + "%";
+        if (industryHandbookText) {
+          industryHandbookText.textContent =
+            live + " of " + total + " industries are live" +
+            (live < total ? ", with the rest being drafted by seniors sector by sector." : ".");
+        }
       });
     }
 
